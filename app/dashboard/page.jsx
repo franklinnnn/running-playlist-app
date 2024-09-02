@@ -7,7 +7,7 @@ import { SongList } from "../../components/song-list";
 import { MakePlaylistModal } from "../../components/modals/make-playlist-modal";
 import { useRouter } from "next/navigation";
 
-export const DashboardPage = () => {
+const DashboardPage = () => {
   const { user, error, loading } = useUser();
   const router = useRouter();
 
