@@ -30,6 +30,7 @@ export const Header = () => {
           })}
         </script>
       </Head>
+
       <div>
         <div className="text-4xl text-center font-display uppercase italic mt-2 mb-12">
           🏃 PacePlaylist
