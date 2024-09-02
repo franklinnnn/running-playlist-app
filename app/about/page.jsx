@@ -35,7 +35,7 @@ const AboutPage = () => {
           need to log in.
         </p>
 
-        <h3 className="text-xl  mt-4 mb-1">
+        <h3 className="text-xl mt-4 mb-1">
           Does PacePlaylist collect any personal information?
         </h3>
         <p>
@@ -47,7 +47,7 @@ const AboutPage = () => {
           .
         </p>
 
-        <h3 className="text-xl  mt-4 mb-1">How are the playlists generated?</h3>
+        <h3 className="text-xl mt-4 mb-1">How are the playlists generated?</h3>
         <p>
           The playlists are generated randomly using the Spotify Web API,
           ensuring you always get a fresh mix of tracks. You can refine your
@@ -55,7 +55,7 @@ const AboutPage = () => {
           energy.
         </p>
 
-        <h3 className="text-xl  mt-4 mb-1">Can I customize the playlists?</h3>
+        <h3 className="text-xl mt-4 mb-1">Can I customize the playlists?</h3>
         <p>
           Currently, the playlists are generated automatically. To build and
           customize your playlists, try my other app,{" "}
@@ -68,13 +68,13 @@ const AboutPage = () => {
           .
         </p>
 
-        <h3 className="text-xl  mt-4 mb-1">Why isn't this thing working?</h3>
+        <h3 className="text-x  mt-4 mb-1">Why isn't this thing working?</h3>
         <p>
           When there is increased traffic, Spotify will run into errors. If you
           are logged in, try logging out and logging back in.
         </p>
 
-        <h3 className="text-xl  mt-4 mb-1">
+        <h3 className="text-xl mt-4 mb-1">
           Can you make PacePlaylist for other music streaming serivces?
         </h3>
         <p>
@@ -82,11 +82,14 @@ const AboutPage = () => {
           listening data, so for now it's just Spotify.
         </p>
 
-        <h3 className="text-xl  mt-4 mb-1">How was PacePlaylist made?</h3>
+        <h3 className="text-xl mt-4 mb-1">How was PacePlaylist made?</h3>
         <p>
           PacePlaylist is an open source tool. Built with NextJS and styled with
           Tailwind.{" "}
-          <Link href="/" className="text-secondary hover:text-primary">
+          <Link
+            href="https://github.com/franklinnnn/running-playlist-app"
+            className="text-secondary hover:text-primary"
+          >
             Check out the code here.
           </Link>
         </p>
