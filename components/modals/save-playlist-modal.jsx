@@ -65,7 +65,10 @@ export const SavePlaylistModal = ({ name, uris }) => {
           {loading ? (
             <div>
               {Array.from({ length: 8 }, (_, i) => (
-                <div className="skeleton mb-2 p-2 rounded-md min-h-16"></div>
+                <div
+                  className="skeleton mb-2 p-2 rounded-md min-h-16"
+                  key={i}
+                ></div>
               ))}
             </div>
           ) : (

@@ -76,7 +76,7 @@ const LoginPage = () => {
             {loading ? (
               <div>
                 {Array.from({ length: 8 }, (_, i) => (
-                  <div className="skeleton h-20 mb-2 p-2 rounded-md"></div>
+                  <div className="skeleton h-20 mb-2 p-2 rounded-md" key={i} />
                 ))}
               </div>
             ) : (
