@@ -7,7 +7,7 @@ export async function GET(req) {
   const code = searchParams.get("code");
   const clientId = process.env.SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-  const redirectUri = "https://paceplaylist.vercel.app/callback";
+  const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
 
   if (!code) {
     return new Response("Authorization code missing", { status: 400 });
