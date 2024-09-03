@@ -2,11 +2,29 @@ import { SongCard } from "./song-card";
 import { SavePlaylistModal } from "./modals/save-playlist-modal";
 import { useRecentlyPlayed } from "../hooks/useRecentlyPlayed";
 import { PlaylistContext } from "./playlist-context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export const SongList = () => {
   const { tracks, name, error, loading } = useRecentlyPlayed();
-  const { playlist } = useContext(PlaylistContext);
+  const { playlist, setPlaylist } = useContext(PlaylistContext);
+
+  console.log(playlist);
+
+  useEffect(() => {
+    const savedLandingPlaylist = localStorage.getItem("saved landing playlist");
+    console.log("saved landing playlist", savedLandingPlaylist);
+    if (savedLandingPlaylist) {
+      console.log("parsing saved playlist");
+      const landingPlaylist = JSON.parse(savedLandingPlaylist);
+      console.log("setting playlist");
+      setPlaylist({
+        name: `${landingPlaylist.name} | PacePlaylist`,
+        tracks: landingPlaylist.tracks.tracks,
+      });
+      console.log("opening playlistts modal");
+      document.getElementById("save_playlist").showModal();
+    }
+  }, []);
 
   const uris =
     playlist?.tracks?.length > 1
@@ -75,7 +93,10 @@ export const SongList = () => {
         )}
       </div>
 
-      <SavePlaylistModal name={name} uris={uris} />
+      <SavePlaylistModal
+        name={playlist.name ? playlist.name : name}
+        uris={uris}
+      />
     </div>
   );
 };

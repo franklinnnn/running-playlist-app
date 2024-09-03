@@ -8,10 +8,10 @@ import { addToPlaylist, createPlaylist } from "../../utils/playlist";
 
 import { PlaylistCard } from "../playlist-card";
 
-export const SavePlaylistModal = ({ uris }) => {
+export const SavePlaylistModal = ({ name, uris }) => {
   const { accessToken } = useAccessToken();
   const { user } = useUser();
-  const { playlists } = useUserPlaylists();
+  const { playlists, loading } = useUserPlaylists();
   const router = useRouter();
   const [showDetails, setShowDetails] = useState(-1);
 
@@ -23,11 +23,10 @@ export const SavePlaylistModal = ({ uris }) => {
   // const uris = tracks.map((track) => track.track.uri);
 
   const handleSaveNewPlaylist = () => {
-    createPlaylist(user.id, "test create playlist", accessToken).then(
-      (response) => {
-        addToPlaylist(response.id, uris, accessToken);
-      }
-    );
+    createPlaylist(user.id, name, accessToken).then((response) => {
+      console.log(response);
+      addToPlaylist(response.id, uris, accessToken);
+    });
     document.getElementById("save_playlist").close();
     console.log("saved to playlist");
   };
@@ -50,18 +49,32 @@ export const SavePlaylistModal = ({ uris }) => {
           </button>
         </div>
         <div className="mt-6 md:max-h-[32rem] pr-1 overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral">
-          {playlists.map((playlist, index) => (
-            <PlaylistCard
-              key={index}
-              playlist={playlist}
-              playlistNumber={index + 1}
-              showDetails={showDetails === index}
-              setShowDetails={setShowDetails}
-              user={user}
-              uris={uris}
-              accessToken={accessToken}
-            />
-          ))}
+          {loading ? (
+            <div>
+              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
+              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
+              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
+              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
+              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
+              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
+              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
+            </div>
+          ) : (
+            <div>
+              {playlists.map((playlist, index) => (
+                <PlaylistCard
+                  key={index}
+                  playlist={playlist}
+                  playlistNumber={index + 1}
+                  showDetails={showDetails === index}
+                  setShowDetails={setShowDetails}
+                  user={user}
+                  uris={uris}
+                  accessToken={accessToken}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <form method="dialog" className="modal-backdrop">

@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export const createPlaylist = async (userId, name, accessToken) => {
-  await axios.post(
+  const response = await axios.post(
     `https://api.spotify.com/v1/users/${userId}/playlists`,
     {
       name: name,
-      description: "Desc",
+      description: "Running playlist generated from PacePlaylist.",
     },
     {
       headers: {
@@ -14,7 +14,6 @@ export const createPlaylist = async (userId, name, accessToken) => {
       },
     }
   );
-
   return response.data;
 };
 

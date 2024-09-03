@@ -22,7 +22,7 @@ const LoginPage = () => {
   });
   const [loading, setLoading] = useState(true);
 
-  console.log(landingPlaylist);
+  // console.log(landingPlaylist);
 
   // useEffect(() => {
   //   async function fetchPlaylist() {
@@ -126,7 +126,7 @@ const LoginPage = () => {
       ) : (
         <div className="md:h-[32rem] overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral bg-primary" />
       )}
-      <LoginModal />
+      <LoginModal landingPlaylist={landingPlaylist} />
       <MakePlaylistModal setLandingPlaylist={setLandingPlaylist} />
     </PlaylistProvider>
   );

@@ -16,8 +16,6 @@ export const PlaylistCard = ({
   const [playlistLength, setPlaylistLength] = useState(undefined);
   const [loading, setLoading] = useState(true);
 
-  // console.log(playlist.tracks.href);
-
   const handleShowDetails = () => {
     setShowDetails((prev) => {
       if (prev === playlistNumber - 1) {
@@ -50,7 +48,7 @@ export const PlaylistCard = ({
       <div className="flex gap-4 justify-start items-center">
         <div className="flex items-center justify-center max-w-10 h-10">
           <Image
-            src={playlist ? playlist?.images[0]?.url : null}
+            src={playlist.images ? playlist?.images[0]?.url : "/next.svg"}
             width={80}
             height={80}
             alt="Playlist cover"
