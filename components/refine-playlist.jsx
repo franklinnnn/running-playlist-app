@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { genres } from "../utils/constants";
 

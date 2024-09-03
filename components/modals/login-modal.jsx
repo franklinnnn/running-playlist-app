@@ -1,7 +1,6 @@
-import Link from "next/link";
-import React, { useContext, useEffect } from "react";
-import { PlaylistContext } from "../playlist-context";
+import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { PlaylistContext } from "../playlist-context";
 
 export const LoginModal = ({ landingPlaylist }) => {
   const { playlist, setPlaylist } = useContext(PlaylistContext);
@@ -10,10 +9,6 @@ export const LoginModal = ({ landingPlaylist }) => {
   const handleLogin = () => {
     console.log("save playlist");
     saveLandingPlaylist();
-    // setPlaylist({
-    //   name: landingPlaylist.name,
-    //   tracks: landingPlaylist.tracks.tracks,
-    // });
     router.push("/api/auth/login");
   };
 

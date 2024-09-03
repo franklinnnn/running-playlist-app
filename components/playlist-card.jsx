@@ -48,7 +48,11 @@ export const PlaylistCard = ({
       <div className="flex gap-4 justify-start items-center">
         <div className="flex items-center justify-center max-w-10 h-10">
           <Image
-            src={playlist.images ? playlist?.images[0]?.url : "/next.svg"}
+            src={
+              playlist.images
+                ? playlist?.images[0]?.url
+                : "/playlist-placeholder.png"
+            }
             width={80}
             height={80}
             alt="Playlist cover"

@@ -1,6 +1,5 @@
 "use client";
 import PlaylistProvider from "../../components/playlist-context";
-import { useAccessToken } from "../../hooks/useAccessToken";
 import { useUser } from "../../hooks/useUser";
 
 import { SongList } from "../../components/song-list";
@@ -23,33 +22,6 @@ const DashboardPage = () => {
   return (
     <PlaylistProvider>
       <div className="font-body">
-        {/* <div className="flex items-center justify-between">
-          {loading ? (
-            <h1 className="skeleton w-32 h-8"></h1>
-          ) : (
-            <h1 className="text-2xl font-display capitalize italic">
-              hello {user?.display_name}!
-            </h1>
-          )}
-
-          <div className="flex gap-2 items-center">
-            <label className="swap swap-rotate">
-              <input
-                type="checkbox"
-                className="theme-controller"
-                value="nord"
-              />
-              <div className="swap-off">☀️</div>
-              <div className="swap-on">🌙</div>
-            </label>
-
-            <button className="btn btn-primary btn-sm" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        </div> */}
-        {/* <hr className="h-px my-6 bg-secondary/20 border-0" /> */}
-
         <SongList />
         <div className="mt-6 w-full flex justify-center">
           <button

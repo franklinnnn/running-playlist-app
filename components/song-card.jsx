@@ -8,12 +8,15 @@ export const SongCard = ({ song }) => {
   return (
     <div>
       {!song || loading ? (
-        // <div className="animate-pulse bg-accent/20 mb-2 p-2 rounded-md flex gap-2 min-h-20" />
         <div className="skeleton h-20 mb-2 p-2 rounded-md" />
       ) : (
         <div className="bg-secondary/10 mb-2 p-2 pt-1 rounded-md flex items-center gap-2 max-h-20 hover:bg-secondary/20 hover:cursor-default transition text-base-content font-body uppercase font-bold">
           <Image
-            src={song?.album?.images[2].url}
+            src={
+              song.album.images
+                ? song?.album?.images[2].url
+                : "/album-placeholder.png"
+            }
             alt="Album cover"
             width={60}
             height={60}

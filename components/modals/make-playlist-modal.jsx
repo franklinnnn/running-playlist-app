@@ -8,8 +8,6 @@ import {
   getRecommendations,
   getRefinedRecommendations,
 } from "../../utils/spotify";
-import { genres } from "../../utils/constants";
-import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { RefinePlaylist } from "../refine-playlist";
 
 const MAX_LENGTH = 12;

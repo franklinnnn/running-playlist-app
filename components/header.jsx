@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { useAccessToken } from "../hooks/useAccessToken";
 import { useUser } from "../hooks/useUser";
 import Link from "next/link";

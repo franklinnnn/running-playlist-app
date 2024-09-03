@@ -1,15 +1,11 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import axios from "axios";
-
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+
+import PlaylistProvider from "../components/playlist-context";
 import { useAccessToken } from "../hooks/useAccessToken";
 import { SongCard } from "../components/song-card";
-import PlaylistProvider, {
-  PlaylistContext,
-} from "../components/playlist-context";
-import { MakePlaylistModal } from "../components/modals/make-playlist-modal";
 import { LoginModal } from "../components/modals/login-modal";
 
 const LoginPage = () => {
@@ -21,23 +17,6 @@ const LoginPage = () => {
     tracks: null,
   });
   const [loading, setLoading] = useState(true);
-
-  // console.log(landingPlaylist);
-
-  // useEffect(() => {
-  //   async function fetchPlaylist() {
-  //     try {
-  //       const response = await axios.get("/api/playlist/landing");
-  //       setLandingPlaylist({ name: "Running playlist", tracks: response.data });
-  //     } catch (error) {
-  //       console.error("Error fetching playlist:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-
-  //   fetchPlaylist();
-  // }, []);
 
   const generatePlaylist = async () => {
     try {
@@ -60,11 +39,7 @@ const LoginPage = () => {
             playlist now!
           </div>
 
-          <button
-            className="btn btn-primary"
-            // onClick={() => document.getElementById("make_playlist").showModal()}
-            onClick={generatePlaylist}
-          >
+          <button className="btn btn-primary" onClick={generatePlaylist}>
             Make me a playlist
           </button>
         </div>
@@ -127,7 +102,6 @@ const LoginPage = () => {
         <div className="md:h-[32rem] overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral bg-primary" />
       )}
       <LoginModal landingPlaylist={landingPlaylist} />
-      <MakePlaylistModal setLandingPlaylist={setLandingPlaylist} />
     </PlaylistProvider>
   );
 };
