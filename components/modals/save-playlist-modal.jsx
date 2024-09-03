@@ -7,13 +7,14 @@ import { useUserPlaylists } from "../../hooks/useUserPlaylists";
 import { addToPlaylist, createPlaylist } from "../../utils/playlist";
 
 import { PlaylistCard } from "../playlist-card";
+import { Slide, toast } from "react-toastify";
 
 export const SavePlaylistModal = ({ name, uris }) => {
   const { accessToken } = useAccessToken();
   const { user } = useUser();
   const { playlists, loading } = useUserPlaylists();
-  const router = useRouter();
   const [showDetails, setShowDetails] = useState(-1);
+  const router = useRouter();
 
   const closeModal = () => {
     router.refresh();
@@ -24,11 +25,23 @@ export const SavePlaylistModal = ({ name, uris }) => {
 
   const handleSaveNewPlaylist = () => {
     createPlaylist(user.id, name, accessToken).then((response) => {
-      console.log(response);
       addToPlaylist(response.id, uris, accessToken);
+      toast.success(
+        `🏃 Success! Playlist ${name} created with ${uris.length} tracks.`,
+        {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Slide,
+        }
+      );
     });
     document.getElementById("save_playlist").close();
-    console.log("saved to playlist");
   };
 
   return (

@@ -1,15 +1,15 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import LoginPage from "./page";
+import Head from "next/head";
+
 import { Header } from "../components/header";
 import { Footer } from "../components/footer";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "PacePlaylist",
-  description: "Get songs to listen to when running",
+  description: "Generate playlists that match your running tempo",
 };
 
 export default function RootLayout({ children }) {
@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
           name="keywords"
           content="running playlists, tempo music, workout music, running apps, fitness playlists"
         />
-        <meta name="author" content="Your Name" />
+        <meta name="author" content="Franklin Assa" />
 
         {/* Open Graph tags for social media */}
         <meta
@@ -36,8 +36,8 @@ export default function RootLayout({ children }) {
           property="og:description"
           content="Generate playlists that match your running tempo."
         />
-        <meta property="og:image" content="/images/your-image.png" />
-        <meta property="og:url" content="https://www.yourapp.com" />
+        <meta property="og:image" content="/app-img.png" />
+        <meta property="og:url" content="https://paceplaylist.vercel.app" />
         <meta property="og:type" content="website" />
 
         {/* Twitter Cards for Twitter */}
@@ -50,10 +50,10 @@ export default function RootLayout({ children }) {
           name="twitter:description"
           content="Generate playlists that match your running tempo."
         />
-        <meta name="twitter:image" content="/images/your-image.png" />
+        <meta name="twitter:image" content="/app-img.png" />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://www.yourapp.com" />
+        <link rel="canonical" href="https://paceplaylist.vercel.app" />
       </Head>
 
       <body className={inter.className} data-theme="sunset">

@@ -52,7 +52,7 @@ export async function GET(req, { params }) {
     ];
     const artist = artistArr[Math.floor(Math.random() * artistArr.length)];
 
-    const tempoArr = ["160", "165", "170", "175", "180", "185"];
+    const tempoArr = ["150", "155", "160", "165", "170", "175", "180", "185"];
     const tempo = tempoArr[Math.floor(Math.random() * tempoArr.length)];
     const minTempo = tempo - 2;
     const maxTempo = +tempo + +2;

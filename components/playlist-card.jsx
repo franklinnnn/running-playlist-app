@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { useAccessToken } from "../hooks/useAccessToken";
 import { calculatePlaylistLength, addToPlaylist } from "../utils/playlist";
+import { Slide, toast } from "react-toastify";
 
 export const PlaylistCard = ({
   playlist,
@@ -36,7 +37,20 @@ export const PlaylistCard = ({
 
   const handleSaveToPlaylist = () => {
     addToPlaylist(playlist.id, uris, accessToken);
-    alert(`Success! ${uris.length} songs saved to playlist ${playlist.name}`);
+    toast.success(
+      `🏃 Success! ${uris.length} tracks saved to playlist ${playlist.name}`,
+      {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      }
+    );
     document.getElementById("save_playlist").close();
   };
 

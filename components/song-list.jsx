@@ -12,16 +12,12 @@ export const SongList = () => {
 
   useEffect(() => {
     const savedLandingPlaylist = localStorage.getItem("saved landing playlist");
-    console.log("saved landing playlist", savedLandingPlaylist);
     if (savedLandingPlaylist) {
-      console.log("parsing saved playlist");
       const landingPlaylist = JSON.parse(savedLandingPlaylist);
-      console.log("setting playlist");
       setPlaylist({
         name: `${landingPlaylist.name} | PacePlaylist`,
         tracks: landingPlaylist.tracks.tracks,
       });
-      console.log("opening playlistts modal");
       document.getElementById("save_playlist").showModal();
     }
   }, []);

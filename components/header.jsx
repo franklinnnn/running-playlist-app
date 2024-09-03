@@ -3,6 +3,8 @@ import { useAccessToken } from "../hooks/useAccessToken";
 import { useUser } from "../hooks/useUser";
 import Link from "next/link";
 import Head from "next/head";
+import { Slide, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Header = () => {
   const { accessToken } = useAccessToken();
@@ -16,6 +18,7 @@ export const Header = () => {
       console.error("Logout error:", err);
     }
   };
+
   return (
     <>
       <Head>
@@ -29,10 +32,10 @@ export const Header = () => {
           })}
         </script>
       </Head>
-
       <div>
+        <ToastContainer />
         <div className="text-4xl text-center font-display uppercase italic mt-2 mb-12">
-          🏃 PacePlaylist
+          🏃 PacePlaylist{" "}
         </div>
         <div className="flex items-center justify-between md:w-[36rem] w-screen px-2">
           {accessToken ? (
@@ -48,7 +51,7 @@ export const Header = () => {
           ) : (
             <h1 className="text-2xl font-display capitalize italic">hello!</h1>
           )}
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center font-body">
             <label className="swap swap-rotate">
               <input
                 type="checkbox"
