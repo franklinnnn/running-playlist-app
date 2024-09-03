@@ -1,5 +1,5 @@
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { genres } from "../utils/constants";
+import { genres } from "../utils/genres";
 
 export const RefinePlaylist = ({
   refinePlaylistInput,

@@ -64,13 +64,9 @@ export const SavePlaylistModal = ({ name, uris }) => {
         <div className="mt-6 md:max-h-[32rem] pr-1 overflow-y-scroll scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral">
           {loading ? (
             <div>
-              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
-              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
-              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
-              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
-              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
-              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
-              <div className="skeleton mb-2 p-2 rounded-md min-h-16" />
+              {Array.from({ length: 8 }, (_, i) => (
+                <div className="skeleton mb-2 p-2 rounded-md min-h-16"></div>
+              ))}
             </div>
           ) : (
             <div>

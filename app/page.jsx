@@ -69,20 +69,15 @@ const LoginPage = () => {
             )}
           </div>
           <div
-            className={`max-h-[30rem] overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral ${
+            className={`h-full md:max-h-[30rem] overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral ${
               loading ? "overflow-y-hidden pr-0" : "overflow-y-scroll pr-1"
             }`}
           >
             {loading ? (
               <div>
-                <div className="skeleton h-20 mb-2 p-2 rounded-md"></div>
-                <div className="skeleton h-20 mb-2 p-2 rounded-md"></div>
-                <div className="skeleton h-20 mb-2 p-2 rounded-md"></div>
-                <div className="skeleton h-20 mb-2 p-2 rounded-md"></div>
-                <div className="skeleton h-20 mb-2 p-2 rounded-md"></div>
-                <div className="skeleton h-20 mb-2 p-2 rounded-md"></div>
-                <div className="skeleton h-20 mb-2 p-2 rounded-md"></div>
-                <div className="skeleton h-20 mb-2 p-2 rounded-md"></div>
+                {Array.from({ length: 8 }, (_, i) => (
+                  <div className="skeleton h-20 mb-2 p-2 rounded-md"></div>
+                ))}
               </div>
             ) : (
               <div className="relative">
@@ -99,7 +94,7 @@ const LoginPage = () => {
           </div>
         </div>
       ) : (
-        <div className="md:h-[32rem] overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral bg-primary" />
+        <div className="h-full md:h-[23rem] overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral bg-primary" />
       )}
       <LoginModal landingPlaylist={landingPlaylist} />
     </PlaylistProvider>
