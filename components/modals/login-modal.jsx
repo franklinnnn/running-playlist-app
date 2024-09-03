@@ -6,6 +6,8 @@ export const LoginModal = ({ landingPlaylist }) => {
   const { playlist, setPlaylist } = useContext(PlaylistContext);
   const router = useRouter();
 
+  console.log("login modal", landingPlaylist);
+
   const handleLogin = () => {
     console.log("save playlist");
     saveLandingPlaylist();

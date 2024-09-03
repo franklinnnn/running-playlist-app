@@ -16,9 +16,16 @@ const LoginPage = () => {
     name: null,
     tracks: null,
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  console.log("landing page", landingPlaylist);
 
   const generatePlaylist = async () => {
+    setLoading(true);
+    setLandingPlaylist({
+      name: null,
+      tracks: null,
+    });
     try {
       const response = await axios.get("/api/playlist/landing");
       setLandingPlaylist({ name: "Running playlist", tracks: response.data });
@@ -39,8 +46,16 @@ const LoginPage = () => {
             playlist now!
           </div>
 
-          <button className="btn btn-primary" onClick={generatePlaylist}>
-            Make me a playlist
+          <button
+            className="btn btn-primary min-w-40"
+            onClick={generatePlaylist}
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : (
+              <span>Make me a playlist</span>
+            )}
           </button>
         </div>
       </div>
@@ -86,7 +101,7 @@ const LoginPage = () => {
                   <span>energy</span>
                   <span>length</span>
                 </div>
-                {landingPlaylist.tracks.tracks.map((track, index) => (
+                {landingPlaylist.tracks.map((track, index) => (
                   <SongCard song={track} key={track.id} />
                 ))}
               </div>

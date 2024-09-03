@@ -16,7 +16,7 @@ export const SongList = () => {
       const landingPlaylist = JSON.parse(savedLandingPlaylist);
       setPlaylist({
         name: `${landingPlaylist.name} | PacePlaylist`,
-        tracks: landingPlaylist.tracks.tracks,
+        tracks: landingPlaylist.tracks,
       });
       document.getElementById("save_playlist").showModal();
     }

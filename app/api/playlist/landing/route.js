@@ -32,11 +32,8 @@ export async function GET(req, { params }) {
   try {
     const accessToken = await getAccessToken();
 
-    // const minTempo = tempo - 5;
-    // const maxTempo = +tempo + +5;
-
-    // const minEnergy = energy - 0.2;
-    // const maxEnergy = 1;
+    let amount = 0;
+    let tracks = [];
 
     const trackArr = [
       "4PTG3Z6ehGkBFwjybzWkR8",
@@ -54,8 +51,8 @@ export async function GET(req, { params }) {
 
     const tempoArr = ["150", "155", "160", "165", "170", "175", "180", "185"];
     const tempo = tempoArr[Math.floor(Math.random() * tempoArr.length)];
-    const minTempo = tempo - 2;
-    const maxTempo = +tempo + +2;
+    let minTempo = tempo - 2;
+    let maxTempo = +tempo + +2;
 
     const seedArr = [
       `&seed_tracks=${track}`,
@@ -63,7 +60,9 @@ export async function GET(req, { params }) {
       `&seed_genres=rock%2C+electronic&seed_tracks=${track}`,
       `&seed_genres=rock%2C+electronic&seed_artists=${artist}`,
     ];
-    const seed = seedArr[Math.floor(Math.random() * seedArr.length)];
+    let seed = seedArr[Math.floor(Math.random() * seedArr.length)];
+
+    console.log("seed", seed);
 
     const requestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo}&min_tempo=${minTempo}&max_tempo=${maxTempo}`;
 
@@ -72,8 +71,34 @@ export async function GET(req, { params }) {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+    amount += playlistResponse.data.tracks.length;
+    tracks = tracks.concat(playlistResponse.data.tracks);
 
-    return NextResponse.json(playlistResponse.data);
+    console.log("playlist length", amount);
+
+    if (amount < 10) {
+      console.log("adding more tracks");
+      let addedTracks = [];
+
+      seed = seedArr[Math.floor(Math.random() * seedArr)];
+      minTempo = minTempo - 2;
+      maxTempo = +maxTempo + +2;
+
+      console.log("seed", seed);
+
+      const addedPlaylistResponse = await axios.get(requestUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      addedTracks = tracks.concat(addedPlaylistResponse.data.tracks);
+      console.log("added tracks", addedTracks.length);
+
+      return NextResponse.json(addedTracks.slice(0, 10));
+    }
+
+    return NextResponse.json(playlistResponse.data.tracks);
   } catch (error) {
     console.error("Error fetching playlist:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
