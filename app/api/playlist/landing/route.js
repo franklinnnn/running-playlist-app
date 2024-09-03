@@ -29,9 +29,6 @@ async function getAccessToken() {
 }
 
 export async function GET(req, { params }) {
-  // const { searchParams } = new URL(req.url);
-  // const queryParams = Object.fromEntries(searchParams.entries());
-  // const { tempo, energy } = params;
   try {
     const accessToken = await getAccessToken();
 
@@ -43,7 +40,7 @@ export async function GET(req, { params }) {
 
     const trackArr = [
       "4PTG3Z6ehGkBFwjybzWkR8",
-      "4t0UsYzmmmZRMTWn77jiGF",
+      "6DlPa2rrVK3BygXJ48WYo3",
       "1hAloWiinXLPQUJxrJReb1",
     ];
     const track = trackArr[Math.floor(Math.random() * trackArr.length)];
@@ -57,6 +54,8 @@ export async function GET(req, { params }) {
 
     const tempoArr = ["160", "165", "170", "175", "180", "185"];
     const tempo = tempoArr[Math.floor(Math.random() * tempoArr.length)];
+    const minTempo = tempo - 2;
+    const maxTempo = +tempo + +2;
 
     const seedArr = [
       `&seed_tracks=${track}`,
@@ -66,18 +65,13 @@ export async function GET(req, { params }) {
     ];
     const seed = seedArr[Math.floor(Math.random() * seedArr.length)];
 
-    const requestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo}`;
+    const requestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo}&min_tempo=${minTempo}&max_tempo=${maxTempo}`;
 
-    const playlistResponse = await axios.get(
-      requestUrl,
-
-      // &min_tempo=${minTempo}&max_tempo=${maxTempo}&energy=${energy}&min_energy=${minEnergy}&max_energy=${maxEnergy}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const playlistResponse = await axios.get(requestUrl, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     return NextResponse.json(playlistResponse.data);
   } catch (error) {
