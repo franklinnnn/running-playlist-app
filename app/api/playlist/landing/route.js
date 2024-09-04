@@ -1,4 +1,3 @@
-// pages/api/playlist/route.js
 import { NextResponse } from "next/server";
 import axios from "axios";
 
@@ -28,8 +27,9 @@ async function getAccessToken() {
   }
 }
 
-export async function GET(req, { params }) {
+export async function GET(req) {
   try {
+    // Always get a fresh access token for each request
     const accessToken = await getAccessToken();
 
     const trackArr = [
@@ -42,23 +42,33 @@ export async function GET(req, { params }) {
       "25uiPmTg16RbhZWAqwLBy5",
       "0gxyHStUsqpMadRV0Di1Qt",
     ];
-    const tempoArr = ["150", "155", "160", "165", "170", "175", "180", "185"];
+    const genreArr = [
+      "rock",
+      "electronic",
+      "j-pop",
+      "k-pop",
+      "jazz",
+      "country",
+    ];
+    const tempoArr = ["150", "155", "160", "165", "170", "175", "180"];
 
     const track = trackArr[Math.floor(Math.random() * trackArr.length)];
     const artist = artistArr[Math.floor(Math.random() * artistArr.length)];
+    const genre = genreArr[Math.floor(Math.random() * genreArr.length)];
     const tempo = tempoArr[Math.floor(Math.random() * tempoArr.length)];
     const minTempo = tempo - 2;
     const maxTempo = +tempo + 2;
 
     const seedArr = [
       `&seed_tracks=${track}`,
-      `&seed_artists=${artist}&seed_genres=rock%2C+electronic`,
-      `&seed_genres=rock%2C+electronic&seed_tracks=${track}`,
-      `&seed_genres=rock%2C+electronic&seed_artists=${artist}`,
+      `&seed_artists=${artist}`,
+      `&seed_genres=${genre}`,
+      `&seed_genres=${genre}&seed_tracks=${track}`,
+      `&seed_genres=${genre}&seed_artists=${artist}`,
     ];
     let seed = seedArr[Math.floor(Math.random() * seedArr.length)];
 
-    console.log("random seed", seed, "tempo", tempo);
+    console.log("random seed", seed, "tempo", tempo, "genre", genre);
 
     // Add a cache-busting parameter
     const cacheBuster = Date.now(); // Or use a random number
@@ -94,7 +104,6 @@ export async function GET(req, { params }) {
       return NextResponse.json(addedTracks.slice(0, 10));
     }
 
-    // return NextResponse.json(tracks);
     return new NextResponse(JSON.stringify(tracks), {
       headers: {
         "Cache-Control":
