@@ -1,3 +1,4 @@
+// pages/api/playlist/route.js
 import { NextResponse } from "next/server";
 import axios from "axios";
 
@@ -57,10 +58,9 @@ export async function GET(req, { params }) {
     ];
     let seed = seedArr[Math.floor(Math.random() * seedArr.length)];
 
-    let amount = 0;
-    let tracks = [];
-
-    const requestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo}&min_tempo=${minTempo}&max_tempo=${maxTempo}`;
+    // Add a cache-busting parameter
+    const cacheBuster = Date.now(); // Or use a random number
+    const requestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo}&min_tempo=${minTempo}&max_tempo=${maxTempo}&cache_buster=${cacheBuster}`;
 
     const playlistResponse = await axios.get(requestUrl, {
       headers: {
@@ -68,8 +68,8 @@ export async function GET(req, { params }) {
       },
     });
 
-    amount += playlistResponse.data.tracks.length;
-    tracks = tracks.concat(playlistResponse.data.tracks);
+    let amount = playlistResponse.data.tracks.length;
+    let tracks = playlistResponse.data.tracks;
 
     if (amount < 10) {
       let addedTracks = [];
@@ -77,7 +77,7 @@ export async function GET(req, { params }) {
       seed = seedArr[Math.floor(Math.random() * seedArr.length)];
       const updatedRequestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo}&min_tempo=${
         minTempo - 2
-      }&max_tempo=${maxTempo + 2}`;
+      }&max_tempo=${maxTempo + 2}&cache_buster=${cacheBuster}`;
 
       const addedPlaylistResponse = await axios.get(updatedRequestUrl, {
         headers: {
