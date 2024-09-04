@@ -90,7 +90,16 @@ export async function GET(req, { params }) {
       return NextResponse.json(addedTracks.slice(0, 10));
     }
 
-    return NextResponse.json(tracks);
+    // return NextResponse.json(tracks);
+    return new NextResponse(JSON.stringify(tracks), {
+      headers: {
+        "Cache-Control":
+          "no-store, no-cache, must-revalidate, proxy-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+        "Surrogate-Control": "no-store",
+      },
+    });
   } catch (error) {
     console.error("Error fetching playlist:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
