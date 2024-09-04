@@ -48,13 +48,15 @@ const LoginPage = () => {
 
           <button
             className="btn btn-primary min-w-40"
-            onClick={generatePlaylist}
+            onClick={accessToken ? router.push("/dashboard") : generatePlaylist}
             disabled={loading}
           >
             {loading ? (
               <span className="loading loading-spinner loading-md"></span>
             ) : (
-              <span>Make me a playlist</span>
+              <span>
+                {accessToken ? "Go to dashboard" : "Make me a playlist"}
+              </span>
             )}
           </button>
         </div>
