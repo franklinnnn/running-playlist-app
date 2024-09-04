@@ -1,4 +1,3 @@
-// pages/api/playlist/route.js
 import { NextResponse } from "next/server";
 import axios from "axios";
 
@@ -32,27 +31,23 @@ export async function GET(req, { params }) {
   try {
     const accessToken = await getAccessToken();
 
-    let amount = 0;
-    let tracks = [];
-
     const trackArr = [
       "4PTG3Z6ehGkBFwjybzWkR8",
       "6DlPa2rrVK3BygXJ48WYo3",
       "1hAloWiinXLPQUJxrJReb1",
     ];
-    const track = trackArr[Math.floor(Math.random() * trackArr.length)];
-
     const artistArr = [
       "4tZwfgrHOc3mvqYlEYSvVi",
       "25uiPmTg16RbhZWAqwLBy5",
       "0gxyHStUsqpMadRV0Di1Qt",
     ];
-    const artist = artistArr[Math.floor(Math.random() * artistArr.length)];
-
     const tempoArr = ["150", "155", "160", "165", "170", "175", "180", "185"];
+
+    const track = trackArr[Math.floor(Math.random() * trackArr.length)];
+    const artist = artistArr[Math.floor(Math.random() * artistArr.length)];
     const tempo = tempoArr[Math.floor(Math.random() * tempoArr.length)];
-    let minTempo = tempo - 2;
-    let maxTempo = +tempo + +2;
+    const minTempo = tempo - 2;
+    const maxTempo = +tempo + 2;
 
     const seedArr = [
       `&seed_tracks=${track}`,
@@ -62,7 +57,8 @@ export async function GET(req, { params }) {
     ];
     let seed = seedArr[Math.floor(Math.random() * seedArr.length)];
 
-    console.log("seed", seed);
+    let amount = 0;
+    let tracks = [];
 
     const requestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo}&min_tempo=${minTempo}&max_tempo=${maxTempo}`;
 
@@ -71,34 +67,30 @@ export async function GET(req, { params }) {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+
     amount += playlistResponse.data.tracks.length;
     tracks = tracks.concat(playlistResponse.data.tracks);
 
-    console.log("playlist length", amount);
-
     if (amount < 10) {
-      console.log("adding more tracks");
       let addedTracks = [];
 
-      seed = seedArr[Math.floor(Math.random() * seedArr)];
-      minTempo = minTempo - 2;
-      maxTempo = +maxTempo + +2;
+      seed = seedArr[Math.floor(Math.random() * seedArr.length)];
+      const updatedRequestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo}&min_tempo=${
+        minTempo - 2
+      }&max_tempo=${maxTempo + 2}`;
 
-      console.log("seed", seed);
-
-      const addedPlaylistResponse = await axios.get(requestUrl, {
+      const addedPlaylistResponse = await axios.get(updatedRequestUrl, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
 
       addedTracks = tracks.concat(addedPlaylistResponse.data.tracks);
-      console.log("added tracks", addedTracks.length);
 
       return NextResponse.json(addedTracks.slice(0, 10));
     }
 
-    return NextResponse.json(playlistResponse.data.tracks);
+    return NextResponse.json(tracks);
   } catch (error) {
     console.error("Error fetching playlist:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
