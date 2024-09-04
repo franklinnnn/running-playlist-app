@@ -58,6 +58,8 @@ export async function GET(req, { params }) {
     ];
     let seed = seedArr[Math.floor(Math.random() * seedArr.length)];
 
+    console.log("random seed", seed, "tempo", tempo);
+
     // Add a cache-busting parameter
     const cacheBuster = Date.now(); // Or use a random number
     const requestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo}&min_tempo=${minTempo}&max_tempo=${maxTempo}&cache_buster=${cacheBuster}`;
@@ -78,6 +80,8 @@ export async function GET(req, { params }) {
       const updatedRequestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo}&min_tempo=${
         minTempo - 2
       }&max_tempo=${maxTempo + 2}&cache_buster=${cacheBuster}`;
+
+      console.log("added seed", seed);
 
       const addedPlaylistResponse = await axios.get(updatedRequestUrl, {
         headers: {

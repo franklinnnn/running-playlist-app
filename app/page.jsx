@@ -18,7 +18,7 @@ const LoginPage = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  console.log("landing page", landingPlaylist);
+  // console.log("landing page", landingPlaylist);
 
   const generatePlaylist = async () => {
     setLoading(true);
