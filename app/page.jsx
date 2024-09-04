@@ -7,8 +7,9 @@ import PlaylistProvider from "../components/playlist-context";
 import { useAccessToken } from "../hooks/useAccessToken";
 import { SongCard } from "../components/song-card";
 import { LoginModal } from "../components/modals/login-modal";
+import { fetchLandingPlaylist, fetchLandingplaylist } from "../utils/generate";
 
-const LoginPage = () => {
+const LandingPage = () => {
   const router = useRouter();
   const { accessToken } = useAccessToken();
 
@@ -17,6 +18,7 @@ const LoginPage = () => {
     tracks: null,
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // console.log("landing page", landingPlaylist);
 
@@ -36,6 +38,11 @@ const LoginPage = () => {
     }
   };
 
+  const handleFetchPlaylist = () => {
+    console.log("fetching playlist");
+    fetchLandingPlaylist(setLandingPlaylist, setLoading, setError);
+  };
+
   return (
     <PlaylistProvider>
       <div className="text-content text-center font-body">
@@ -48,7 +55,9 @@ const LoginPage = () => {
 
           <button
             className="btn btn-primary min-w-40"
-            onClick={accessToken ? router.push("/dashboard") : generatePlaylist}
+            onClick={
+              accessToken ? router.push("/dashboard") : handleFetchPlaylist
+            }
             disabled={loading}
           >
             {loading ? (
@@ -118,4 +127,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LandingPage;
