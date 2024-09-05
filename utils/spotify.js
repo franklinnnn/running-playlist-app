@@ -224,8 +224,6 @@ export const getLandingPlaylist = async (
     const tokenResponse = await axios.get("/api/auth/client/token");
     const accessToken = tokenResponse.data.accessToken;
 
-    console.log(accessToken);
-
     const trackArr = [
       "4PTG3Z6ehGkBFwjybzWkR8",
       "6DlPa2rrVK3BygXJ48WYo3",

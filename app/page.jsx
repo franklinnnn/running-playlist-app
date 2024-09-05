@@ -7,7 +7,7 @@ import PlaylistProvider from "../components/playlist-context";
 import { useAccessToken } from "../hooks/useAccessToken";
 import { SongCard } from "../components/song-card";
 import { LoginModal } from "../components/modals/login-modal";
-import { fetchLandingPlaylist, fetchLandingplaylist } from "../utils/generate";
+import { getLandingPlaylist } from "../utils/spotify";
 
 const LandingPage = () => {
   const router = useRouter();
@@ -19,8 +19,6 @@ const LandingPage = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  // console.log("landing page", landingPlaylist);
 
   const generatePlaylist = async () => {
     setLoading(true);
@@ -40,7 +38,7 @@ const LandingPage = () => {
 
   const handleFetchPlaylist = () => {
     console.log("fetching playlist");
-    fetchLandingPlaylist(setLandingPlaylist, setLoading, setError);
+    getLandingPlaylist(setLandingPlaylist, setLoading, setError);
   };
 
   return (
