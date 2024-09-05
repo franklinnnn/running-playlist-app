@@ -1,15 +1,11 @@
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { PlaylistContext } from "../playlist-context";
 
 import { useAccessToken } from "../../hooks/useAccessToken";
 import { useRecentlyPlayed } from "../../hooks/useRecentlyPlayed";
-import {
-  getRecommendations,
-  getRefinedRecommendations,
-} from "../../utils/spotify";
+import { getRefinedRecommendations } from "../../utils/spotify";
 import { RefinePlaylist } from "../refine-playlist";
-import { getPlaylist } from "../../utils/get-playlists";
+import { getPlaylist, getRefinedPlaylist } from "../../utils/get-playlists";
 
 const MAX_LENGTH = 12;
 
@@ -34,7 +30,7 @@ const refinePlaylistInitialValues = {
   energy: 0.5,
   danceability: 0.5,
   instrumentalness: 0.5,
-  mood: 0.5,
+  valence: 0.5,
   popularity: 50,
 };
 
@@ -60,16 +56,22 @@ export const MakePlaylistModal = ({ setLandingPlaylist }) => {
     document.getElementById("make_playlist").close();
   };
 
-  const handleMakeRefinedPlaylist = () => {
-    console.log("refined playlist input", refinePlaylistInput);
-    getRefinedRecommendations(refinePlaylistInput, accessToken).then(
-      (response) => {
-        setPlaylist({
-          name: `${refinePlaylistInput.tempo} BPM Running Playlist 👟 | PacePlaylist`,
-          tracks: response,
-        });
-      }
-    );
+  // const handleMakeRefinedPlaylist = () => {
+  //   console.log("refined playlist input", refinePlaylistInput);
+  //   getRefinedRecommendations(refinePlaylistInput, accessToken).then(
+  //     (response) => {
+  //       setPlaylist({
+  //         name: `${refinePlaylistInput.tempo} BPM Running Playlist 👟 | PacePlaylist`,
+  //         tracks: response,
+  //       });
+  //     }
+  //   );
+  //   document.getElementById("make_playlist").close();
+  // };
+
+  const handleGetRefinedPlaylist = () => {
+    getRefinedPlaylist(refinePlaylistInput, setPlaylist, setLoading, setError);
+    handleModalClose();
     document.getElementById("make_playlist").close();
   };
 
@@ -223,7 +225,7 @@ export const MakePlaylistModal = ({ setLandingPlaylist }) => {
             className="btn btn-primary font-body"
             onClick={
               showRefinePlaylistInput
-                ? handleMakeRefinedPlaylist
+                ? handleGetRefinedPlaylist
                 : handleGetPlaylist
             }
           >

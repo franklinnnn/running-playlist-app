@@ -1,5 +1,5 @@
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { genres } from "../utils/genres";
+import { genreArray } from "../utils/genres";
 
 export const RefinePlaylist = ({
   refinePlaylistInput,
@@ -188,7 +188,7 @@ export const RefinePlaylist = ({
           </div>
           <div className="z-10">
             <ReactSearchAutocomplete
-              items={genres}
+              items={genreArray}
               onSearch={handleOnSearch}
               onHover={handleOnHover}
               onSelect={handleOnSelect}
@@ -204,6 +204,8 @@ export const RefinePlaylist = ({
         <span className="font-display text-lg uppercase italic">Tempo</span>
         <span className="text-xs my-1">150-180 is a good range.</span>
       </div>
+
+      {/* TEMPO */}
       <div className="flex items-center gap-4">
         <input
           type="range"
@@ -223,6 +225,8 @@ export const RefinePlaylist = ({
           {refinePlaylistInput.tempo}
         </span>
       </div>
+
+      {/* ENERGY */}
       <div className="flex items-center gap-4">
         <span className="font-display text-lg uppercase italic">Energy</span>
         <span className="text-xs my-1">
@@ -248,7 +252,8 @@ export const RefinePlaylist = ({
           {refinePlaylistInput.energy}
         </span>
       </div>
-      <div className="flex items-center gap-4">
+
+      {/* <div className="flex items-center gap-4">
         <span className="font-display text-lg uppercase italic">
           Danceability
         </span>
@@ -272,7 +277,9 @@ export const RefinePlaylist = ({
         <span className="font-display text-xl text-right w-10">
           {refinePlaylistInput.danceability}
         </span>
-      </div>
+      </div> */}
+
+      {/* INSTRUMENTALNESS */}
       <div className="flex items-center gap-4">
         <span className="font-display text-lg uppercase italic">
           Instrumentalness
@@ -298,6 +305,8 @@ export const RefinePlaylist = ({
           {refinePlaylistInput.instrumentalness}
         </span>
       </div>
+
+      {/* MOOD */}
       <div className="flex items-center gap-4">
         <span className="font-display text-lg uppercase italic">Mood</span>
         <span className="text-xs my-1">Happy tracks or sad tracks</span>
@@ -312,16 +321,17 @@ export const RefinePlaylist = ({
           onChange={() =>
             setRefinePlaylistInput({
               ...refinePlaylistInput,
-              mood: event.target.value,
+              valence: event.target.value,
             })
           }
           className="range range-primary range-xs"
         />
         <span className="font-display text-xl text-right w-10">
-          {refinePlaylistInput.mood}
+          {refinePlaylistInput.valence}
         </span>
       </div>
-      <div className="flex items-center gap-4">
+
+      {/* <div className="flex items-center gap-4">
         <span className="font-display text-lg uppercase italic">
           Popularity
         </span>
@@ -347,7 +357,8 @@ export const RefinePlaylist = ({
         <span className="font-display text-xl text-right w-10">
           {refinePlaylistInput.popularity}
         </span>
-      </div>
+      </div> */}
+
       <div className="flex justify-center w-full text-xs mt-4">
         Don't go too crazy. It might not find anything...
       </div>
