@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
-const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+const clientSecret = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
 
 const getAccessToken = async () => {
   try {
@@ -20,6 +20,8 @@ const getAccessToken = async () => {
         },
       }
     );
+
+    console.log(response);
     return response.data.access_token;
   } catch (error) {
     console.error("Error fetching access token:", error);
@@ -57,13 +59,6 @@ export const fetchLandingPlaylist = async (
       "country",
     ];
     const tempoArr = ["150", "155", "160", "165", "170", "175", "180"];
-    const seedArr = [
-      `&seed_tracks=${track}`,
-      `&seed_artists=${artist}`,
-      `&seed_genres=${genre}`,
-      `&seed_genres=${genre}&seed_tracks=${track}`,
-      `&seed_genres=${genre}&seed_artists=${artist}`,
-    ];
 
     const track = trackArr[Math.floor(Math.random() * trackArr.length)];
     const artist = artistArr[Math.floor(Math.random() * artistArr.length)];
@@ -71,6 +66,14 @@ export const fetchLandingPlaylist = async (
     const tempo = tempoArr[Math.floor(Math.random() * tempoArr.length)];
     const minTempo = tempo - 2;
     const maxTempo = +tempo + 2;
+
+    const seedArr = [
+      `&seed_tracks=${track}`,
+      `&seed_artists=${artist}`,
+      `&seed_genres=${genre}`,
+      `&seed_genres=${genre}&seed_tracks=${track}`,
+      `&seed_genres=${genre}&seed_artists=${artist}`,
+    ];
     let seed = seedArr[Math.floor(Math.random() * seedArr.length)];
 
     // Add a cache-busting parameter
