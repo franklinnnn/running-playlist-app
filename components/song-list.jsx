@@ -8,8 +8,6 @@ export const SongList = () => {
   const { tracks, name, error, loading } = useRecentlyPlayed();
   const { playlist, setPlaylist } = useContext(PlaylistContext);
 
-  console.log(playlist);
-
   useEffect(() => {
     const savedLandingPlaylist = localStorage.getItem("saved landing playlist");
     if (savedLandingPlaylist) {

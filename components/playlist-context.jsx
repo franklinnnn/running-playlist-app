@@ -4,21 +4,21 @@ export const PlaylistContext = createContext();
 
 const PlaylistProvider = ({ children }) => {
   const [playlist, setPlaylist] = useState({
-    name: undefined,
-    tracks: [],
+    name: null,
+    tracks: null,
   });
-  const [playlistName, setPlaylistName] = useState("");
-  const [userPlaylists, setUserPlaylists] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   return (
     <PlaylistContext.Provider
       value={{
         playlist,
         setPlaylist,
-        playlistName,
-        setPlaylistName,
-        userPlaylists,
-        setUserPlaylists,
+        loading,
+        setLoading,
+        error,
+        setError,
       }}
     >
       {children}

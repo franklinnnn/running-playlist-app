@@ -1,4 +1,4 @@
-export const genres = [
+export const genreArray = [
   { id: 1, name: "acoustic" },
   { id: 2, name: "afrobeat" },
   { id: 3, name: "alt-rock" },
@@ -126,3 +126,20 @@ export const genres = [
   { id: 125, name: "work-out" },
   { id: 126, name: "world-music" },
 ];
+
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)); // Random index from 0 to i
+    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+  }
+  return array;
+};
+
+export const getRandomGenres = () => {
+  const maxElements = 3;
+  const shuffledArray = shuffleArray([...genreArray]);
+
+  const result = shuffledArray.slice(0, maxElements).map((item) => item);
+
+  return result;
+};
