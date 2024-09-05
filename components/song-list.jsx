@@ -62,31 +62,23 @@ export const SongList = () => {
           </div>
         ) : (
           <div className="relative">
-            {playlist.tracks.length || tracks.length < 1 ? (
-              <div className="flex justify-center w-full">
-                Nothing recently played. Listen to something!
+            <div className="sticky top-0 right-0 bg-base-100 mb-1 z-10 flex justify-end gap-12 pr-9 text-xs uppercase font-display">
+              <span>tempo</span>
+              <span>energy</span>
+              <span>length</span>
+            </div>
+            {playlist?.tracks?.length > 1 ? (
+              <div>
+                {playlist?.tracks?.map((item) => (
+                  <SongCard song={item} key={item.id} />
+                ))}
               </div>
             ) : (
-              <>
-                <div className="sticky top-0 right-0 bg-base-100 mb-1 z-10 flex justify-end gap-12 pr-9 text-xs uppercase font-display">
-                  <span>tempo</span>
-                  <span>energy</span>
-                  <span>length</span>
-                </div>
-                {playlist?.tracks?.length > 1 ? (
-                  <div>
-                    {playlist?.tracks?.map((item) => (
-                      <SongCard song={item} key={item.id} />
-                    ))}
-                  </div>
-                ) : (
-                  <div>
-                    {tracks.map((item) => (
-                      <SongCard song={item.track} key={item.played_at} />
-                    ))}
-                  </div>
-                )}
-              </>
+              <div>
+                {tracks.map((item) => (
+                  <SongCard song={item.track} key={item.played_at} />
+                ))}
+              </div>
             )}
           </div>
         )}
