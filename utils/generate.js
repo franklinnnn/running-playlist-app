@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
-const clientSecret = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
+const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
 const getAccessToken = async () => {
   try {
