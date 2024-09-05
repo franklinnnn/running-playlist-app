@@ -1,37 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 
-// const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
-// const clientSecret = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
-
-const clientId = "c845014e7e774848907819abc1d8c50e";
-const clientSecret = "f05d68eb1318471d8a9e301a8973e6a0";
-
-const getAccessToken = async () => {
-  try {
-    const response = await axios.post(
-      "https://accounts.spotify.com/api/token",
-      new URLSearchParams({
-        grant_type: "client_credentials",
-      }),
-      {
-        headers: {
-          Authorization: `Basic ${Buffer.from(
-            `${clientId}:${clientSecret}`
-          ).toString("base64")}`,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
-    );
-
-    console.log(response);
-    return response.data.access_token;
-  } catch (error) {
-    console.error("Error fetching access token:", error);
-    throw new Error("Failed to retrieve access token");
-  }
-};
-
 export const fetchLandingPlaylist = async (
   setLandingPlaylist,
   setLoading,
@@ -41,7 +10,10 @@ export const fetchLandingPlaylist = async (
   setError(null);
 
   try {
-    const accessToken = await getAccessToken();
+    const tokenResponse = await axios.get("/api/auth/client/token");
+    const accessToken = tokenResponse.data.accessToken;
+
+    console.log(accessToken);
 
     const trackArr = [
       "4PTG3Z6ehGkBFwjybzWkR8",

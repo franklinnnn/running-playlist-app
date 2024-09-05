@@ -9,7 +9,7 @@ export function useAccessToken() {
   useEffect(() => {
     async function fetchAccessToken() {
       try {
-        const response = await axios.get("/api/auth/token");
+        const response = await axios.get("/api/auth/user/token");
         setAccessToken(response.data.accessToken);
       } catch (err) {
         console.error("Error fetching access token:", err);

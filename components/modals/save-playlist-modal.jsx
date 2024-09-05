@@ -21,8 +21,6 @@ export const SavePlaylistModal = ({ name, uris }) => {
     setShowDetails(-1);
   };
 
-  // const uris = tracks.map((track) => track.track.uri);
-
   const handleSaveNewPlaylist = () => {
     createPlaylist(user.id, name, accessToken).then((response) => {
       addToPlaylist(response.id, uris, accessToken);
@@ -73,18 +71,26 @@ export const SavePlaylistModal = ({ name, uris }) => {
             </div>
           ) : (
             <div>
-              {playlists.map((playlist, index) => (
-                <PlaylistCard
-                  key={index}
-                  playlist={playlist}
-                  playlistNumber={index + 1}
-                  showDetails={showDetails === index}
-                  setShowDetails={setShowDetails}
-                  user={user}
-                  uris={uris}
-                  accessToken={accessToken}
-                />
-              ))}
+              {playlists.length < 1 ? (
+                <div className="flex justify-center w-full">
+                  No playlists found.
+                </div>
+              ) : (
+                <div>
+                  {playlists.map((playlist, index) => (
+                    <PlaylistCard
+                      key={index}
+                      playlist={playlist}
+                      playlistNumber={index + 1}
+                      showDetails={showDetails === index}
+                      setShowDetails={setShowDetails}
+                      user={user}
+                      uris={uris}
+                      accessToken={accessToken}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
