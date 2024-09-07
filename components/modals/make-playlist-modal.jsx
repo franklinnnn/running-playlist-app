@@ -55,19 +55,6 @@ export const MakePlaylistModal = ({ setLandingPlaylist }) => {
     document.getElementById("make_playlist").close();
   };
 
-  // const handleMakeRefinedPlaylist = () => {
-  //   console.log("refined playlist input", refinePlaylistInput);
-  //   getRefinedRecommendations(refinePlaylistInput, accessToken).then(
-  //     (response) => {
-  //       setPlaylist({
-  //         name: `${refinePlaylistInput.tempo} BPM Running Playlist 👟 | PacePlaylist`,
-  //         tracks: response,
-  //       });
-  //     }
-  //   );
-  //   document.getElementById("make_playlist").close();
-  // };
-
   const handleGetRefinedPlaylist = () => {
     getRefinedPlaylist(refinePlaylistInput, setPlaylist, setLoading, setError);
     handleModalClose();

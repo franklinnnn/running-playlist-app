@@ -264,7 +264,7 @@ export const getRefinedPlaylist = async (
       // console.log("found less than 10 tracks, updating input parameters");
       // update input numbers
 
-      tempo = tempo + +2;
+      tempo = +tempo + +2;
       minTempo = tempo - 2;
       maxTempo = tempo + 2;
 
