@@ -35,7 +35,7 @@ export const Header = () => {
       <div>
         <ToastContainer />
         <div className="text-4xl text-center font-display uppercase italic mt-2 mb-12">
-          🏃 PacePlaylist{" "}
+          <Link href={accessToken ? "/dashboard" : "/"}>🏃 PacePlaylist </Link>
         </div>
         <div className="flex items-center justify-between md:w-[36rem] w-screen px-2">
           {accessToken ? (

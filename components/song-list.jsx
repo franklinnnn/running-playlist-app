@@ -30,7 +30,7 @@ export const SongList = () => {
   };
   return (
     <div className="relative  w-screen md:max-w-[36rem]">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center px-2 mb-6">
         {loading ? (
           <h2 className="skeleton w-40 h-8"></h2>
         ) : (
@@ -48,7 +48,7 @@ export const SongList = () => {
       </div>
 
       <div
-        className={`max-h-[30rem] overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral ${
+        className={`md:max-h-[30rem] mx-1 overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral ${
           loading ? "overflow-y-hidden pr-0" : "overflow-y-scroll pr-1"
         }`}
       >
@@ -60,7 +60,7 @@ export const SongList = () => {
           </div>
         ) : (
           <div className="relative">
-            <div className="sticky top-0 right-0 bg-base-100 mb-1 z-10 flex justify-end gap-12 pr-9 text-xs uppercase font-display">
+            <div className="sticky top-0 right-0 bg-base-100 mb-1 z-10 hidden md:flex justify-end gap-12 pr-9 text-xs uppercase font-display">
               <span>tempo</span>
               <span>energy</span>
               <span>length</span>

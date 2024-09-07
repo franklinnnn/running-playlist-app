@@ -32,9 +32,16 @@ export const SongCard = ({ song }) => {
               </p>
             </div>
             <div className="relative flex flex-row justify-end w-1/2 text-md font-display">
-              <span className="pl-2 min-w-20">❤️ {tempo}</span>
-              <span className="pl-2 min-w-20">⚡ {energy}</span>
-              <span className="pl-2 min-w-20">⌚ {length}</span>
+              <div className="flex flex-col justify-evenly text-xs md:hidden">
+                <span>tempo</span>
+                <span>energy</span>
+                <span>length</span>
+              </div>
+              <div className="flex flex-col md:flex-row">
+                <span className="pl-2 min-w-20">❤️ {tempo}</span>
+                <span className="pl-2 min-w-20">⚡ {energy}</span>
+                <span className="pl-2 min-w-20">⌚ {length}</span>
+              </div>
             </div>
           </div>
         </div>
