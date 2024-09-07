@@ -68,7 +68,15 @@ const AboutPage = () => {
           .
         </p>
 
-        <h3 className="text-x  mt-4 mb-1">Why isn't this thing working?</h3>
+        <h3 className="text-xl  mt-4 mb-1">Why am I not getting results?</h3>
+        <p>
+          The Refine Playlist option needs an artist, track, or genre for the
+          search to start from. If refining only by genre, use at least 3 to get
+          good results. A combination of artist, track, and genre will get the
+          best results.
+        </p>
+
+        <h3 className="text-xl  mt-4 mb-1">Why isn't this thing working?</h3>
         <p>
           When there is increased traffic, Spotify will run into errors. If you
           are logged in, try logging out and logging back in.

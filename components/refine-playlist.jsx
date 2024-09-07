@@ -1,5 +1,6 @@
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { genreArray } from "../utils/genres";
+import Link from "next/link";
 
 export const RefinePlaylist = ({
   refinePlaylistInput,
@@ -359,8 +360,12 @@ export const RefinePlaylist = ({
         </span>
       </div> */}
 
-      <div className="flex justify-center w-full text-xs mt-4">
-        Don't go too crazy. It might not find anything...
+      <div className="flex flex-col items-center justify-center w-full text-xs mt-4">
+        <p>Don't go too crazy. It might not find anything... </p>
+
+        <Link href="/about" className="link">
+          About refining playlists
+        </Link>
       </div>
     </form>
   );
