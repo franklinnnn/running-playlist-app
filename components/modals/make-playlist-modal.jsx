@@ -6,6 +6,7 @@ import { useRecentlyPlayed } from "../../hooks/useRecentlyPlayed";
 import { getRefinedRecommendations } from "../../utils/spotify";
 import { RefinePlaylist } from "../refine-playlist";
 import { getPlaylist, getRefinedPlaylist } from "../../utils/get-playlists";
+import { Slide, toast } from "react-toastify";
 
 const MAX_LENGTH = 12;
 
@@ -16,28 +17,26 @@ const playlistInitialValues = {
 
 const refinePlaylistInitialValues = {
   artist: {
-    name: undefined,
-    id: undefined,
+    name: null,
+    id: null,
     type: "artist",
   },
   track: {
-    name: undefined,
-    id: undefined,
+    name: null,
+    id: null,
     type: "track",
   },
-  genres: ["rock", "electronic"],
-  tempo: 160,
-  energy: 0.5,
-  danceability: 0.5,
-  instrumentalness: 0.5,
-  valence: 0.5,
-  popularity: 50,
+  genres: ["rock", "country", "edm"],
+  tempo: 170,
+  energy: 0.7,
+  // instrumentalness: 0.5,
+  // valence: 0.7,
 };
 
 export const MakePlaylistModal = ({ setLandingPlaylist }) => {
   const { accessToken } = useAccessToken();
   const { tracks } = useRecentlyPlayed();
-  const { setPlaylist, setPlaylistName, setLoading, setError } =
+  const { setPlaylist, setPlaylistName, setLoading, error, setError } =
     useContext(PlaylistContext);
 
   const [playlistInput, setPlaylistInput] = useState(playlistInitialValues);
@@ -50,7 +49,7 @@ export const MakePlaylistModal = ({ setLandingPlaylist }) => {
   );
 
   const handleGetPlaylist = () => {
-    console.log("getting playlist");
+    // console.log("getting playlist");
     getPlaylist(playlistInput, tracks, setPlaylist, setLoading, setError);
     handleModalClose();
     document.getElementById("make_playlist").close();

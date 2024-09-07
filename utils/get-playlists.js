@@ -17,11 +17,11 @@ export const getPlaylist = async (
     const tokenResponse = await axios.get("/api/auth/client/token");
     const accessToken = tokenResponse.data.accessToken;
 
-    console.log("input parameters", {
-      input: input,
-      tracks: trackArr,
-      artists: artistArr,
-    });
+    // console.log("input parameters", {
+    //   input: input,
+    //   tracks: trackArr,
+    //   artists: artistArr,
+    // });
 
     const tempo = input.tempo;
     const energy = input.energy;
@@ -35,9 +35,9 @@ export const getPlaylist = async (
     const artist = artistArr[Math.floor(Math.random() * artistArr.length)];
 
     const genreArr = getRandomGenres();
-    console.log(genreArr);
+    // console.log(genreArr);
     const genre = genreArr.map((item) => item.name).join(",");
-    console.log(genre);
+    // console.log(genre);
 
     const seedArr = [
       `&seed_tracks=${track}`,
@@ -145,35 +145,33 @@ export const getRefinedPlaylist = async (
     const tokenResponse = await axios.get("/api/auth/client/token");
     const accessToken = tokenResponse.data.accessToken;
 
-    console.log("input parameters", {
-      input: input.input,
-    });
+    // console.log("refined playlist search", "input parameters", input);
 
     // seed artist, track, and genre
     let artist;
     if (input.artist.id) {
       artist = `&seed_artist=${input.artist.id}`;
-      console.log("artist from id", artist);
+      // console.log("artist from id", artist);
     } else if (input.artist.name) {
       const id = await searchArtist(input.artist.name, accessToken);
       artist = `&seed_artists=${id}`;
-      console.log("artist from name", artist);
+      // console.log("artist from name", artist);
     } else {
       artist = "";
-      console.log("artist blank", artist);
+      // console.log("artist blank", artist);
     }
 
     let track;
     if (input.track.id) {
       track = `&seed_tracks=${input.track.id}`;
-      console.log("track from id", track);
+      // console.log("track from id", track);
     } else if (input.track.name) {
       const id = await searchTrack(input.track.name, accessToken);
       track = `&seed_tracks=${id}`;
-      console.log("track from name", track);
+      // console.log("track from name", track);
     } else {
       track = "";
-      console.log("track blank", track);
+      // console.log("track blank", track);
     }
 
     const genres = `&seed_genres=${input.genres
@@ -183,20 +181,20 @@ export const getRefinedPlaylist = async (
     const seeds = `${artist}${track}${genres}`;
 
     // input ranges
-    const tempo = input.tempo;
+    let tempo = input.tempo;
     let minTempo = tempo - 2;
     let maxTempo = +tempo + +2 > 200 ? 200 : +tempo + +2;
 
-    const energy = input.energy;
+    let energy = input.energy;
     let minEnergy = energy - 0.2;
     let maxEnergy = +energy + 0.2 > 1 ? 1 : +energy + 0.2;
 
-    const instrumentalness = input.instrumentalness;
+    let instrumentalness = input.instrumentalness;
     let minInstrumentalness = instrumentalness - 0.2;
     let maxInstrumentalness =
       +instrumentalness + 0.2 > 1 ? 1 : +instrumentalness + 0.2;
 
-    const valence = input.valence;
+    let valence = input.valence;
     let minValence = valence - 0.2;
     let maxValence = +valence + 0.2 > 1 ? 1 : +valence + 0.2;
 
@@ -230,18 +228,20 @@ export const getRefinedPlaylist = async (
     };
 
     const cacheBuster = Date.now();
-    const requestUrl = `https://api.spotify.com/v1/recommendations?limit=10${seeds}&target_tempo=${tempo}&min_tempo=${minTempo}&max_tempo=${maxTempo}&target_energy=${energy}&min_energy=${minEnergy}&max_energy=${maxEnergy}&target_instrumentalness=${instrumentalness}&min_instrumentalness=${minInstrumentalness}&max_instrumentalness=${maxInstrumentalness}&target_valence=${valence}&min_valence=${minValence}&max_valence=${maxValence}&cache_buster=${cacheBuster}`;
+    const requestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seeds}&target_tempo=${tempo}&min_tempo=${minTempo}&max_tempo=${maxTempo}&target_energy=${energy}&min_energy=${minEnergy}&max_energy=${maxEnergy}`;
 
-    console.log("request parameters", {
-      artist: artist,
-      track: track,
-      genre: genres,
-      tempo: tempo,
-      energy: energy,
-      instrumentalness: instrumentalness,
-      mood: valence,
-      seed: seeds,
-    });
+    // &target_instrumentalness=${instrumentalness}&min_instrumentalness=${minInstrumentalness}&max_instrumentalness=${maxInstrumentalness}&target_valence=${valence}&min_valence=${minValence}&max_valence=${maxValence}&cache_buster=${cacheBuster}`;
+
+    // console.log("request parameters", {
+    //   artist: artist,
+    //   track: track,
+    //   genre: genres,
+    //   tempo: tempo,
+    //   energy: energy,
+    // instrumentalness: instrumentalness,
+    // mood: valence,
+    //   seed: seeds,
+    // });
 
     // const playlistResponse = await axios.get(requestUrl, {
     //   headers: {
@@ -249,8 +249,10 @@ export const getRefinedPlaylist = async (
     //   },
     // });
 
+    // console.log("fetching tracks...");
     let fetchedTracks = await fetchTracks(requestUrl);
     if (fetchedTracks) {
+      // console.log(tracks);
       tracks = fetchedTracks.filter(
         (track, index, self) =>
           self.findIndex((t) => t.id === track.id) === index
@@ -259,20 +261,61 @@ export const getRefinedPlaylist = async (
 
     // add more tracks if there are less than 10
     while (tracks.length < 12 && retries < maxRetries) {
+      // console.log("found less than 10 tracks, updating input parameters");
       // update input numbers
-      minTempo -= 2;
-      maxTempo += 2;
-      minEnergy -= 0.2;
-      maxEnergy += 0.2;
-      minInstrumentalness -= 0.2;
-      maxInstrumentalness += 0.2;
-      minValence -= 0.2;
-      maxValence += 0.2;
+
+      tempo = tempo + +2;
+      minTempo = tempo - 2;
+      maxTempo = tempo + 2;
+
+      energy = energy > 1 ? 1 : energy + 0.2;
+      minEnergy = energy - 0.2;
+      maxEnergy = 1;
+
+      instrumentalness = instrumentalness > 1 ? 1 : instrumentalness + 0.2;
+      minInstrumentalness = instrumentalness - 0.2;
+      maxInstrumentalness = 1;
+
+      valence = valence > 1 ? 1 : valence + 0.2;
+      minValence = valence - 0.2;
+      maxValence = 1;
 
       retries++;
 
-      const updatedRequestUrl = `https://api.spotify.com/v1/recommendations?limit=10${seeds}&target_tempo=${tempo}&min_tempo=${minTempo}&max_tempo=${maxTempo}&target_energy=${energy}&min_energy=${minEnergy}&max_energy=${maxEnergy}&target_instrumentalness=${instrumentalness}&min_instrumentalness=${minInstrumentalness}&max_instrumentalness=${maxInstrumentalness}&target_valence=${valence}&min_valence=${minValence}&max_valence=${maxValence}&cache_buster=${cacheBuster}`;
+      const updatedRequestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seeds}&target_tempo=${tempo}&min_tempo=${minTempo}&max_tempo=${maxTempo}&target_energy=${energy}&min_energy=${minEnergy}&max_energy=${maxEnergy}
+      `;
+      // &target_instrumentalness=${instrumentalness}&min_instrumentalness=${minInstrumentalness}&max_instrumentalness=${maxInstrumentalness}
 
+      // &target_valence=${valence}&min_valence=${minValence}&max_valence=${maxValence}&cache_buster=${cacheBuster}`;
+
+      // console.log("updated request parameters", {
+      //   artist: artist,
+      //   track: track,
+      //   genre: genres,
+      //   tempo: {
+      //     target: tempo,
+      //     min: minTempo,
+      //     max: maxTempo,
+      //   },
+      //   energy: {
+      //     target: energy,
+      //     min: minEnergy,
+      //     max: maxEnergy,
+      //   },
+      // instrumentalness: {
+      //   target: instrumentalness,
+      //   min: minInstrumentalness,
+      //   max: maxInstrumentalness,
+      // },
+      // mood: {
+      //   target: valence,
+      //   min: minValence,
+      //   max: maxValence,
+      // },
+      //   seed: seeds,
+      // });
+
+      // console.log("fetching tracks with updated parameters...");
       const newTracks = await fetchTracks(updatedRequestUrl);
       // const addedPlaylistResponse = await axios.get(updatedRequestUrl, {
       //   headers: {
@@ -302,11 +345,16 @@ export const getRefinedPlaylist = async (
       setError(
         `Found ${tracks.length} tracks. Try different parameters for more results!`
       );
+      setPlaylist({
+        name: `${tempo} BPM Running playlist | PacePlaylist`,
+        tracks: tracks,
+      });
+    } else {
+      setPlaylist({
+        name: `${tempo} BPM Running playlist | PacePlaylist`,
+        tracks: tracks,
+      });
     }
-    setPlaylist({
-      name: `${tempo} BPM Running playlist | PacePlaylist`,
-      tracks: tracks,
-    });
   } catch (error) {
     setError("Error fetching playlist. Please try again later.");
     console.log("Error fetching playlist:", error);
@@ -316,7 +364,7 @@ export const getRefinedPlaylist = async (
 };
 
 export const searchArtist = async (value, accessToken) => {
-  console.log(value);
+  // console.log(value);
   const request = await axios.get(
     `https://api.spotify.com/v1/search?q=${value}&type=artist&limit=1`,
     {
@@ -326,9 +374,9 @@ export const searchArtist = async (value, accessToken) => {
       },
     }
   );
-  console.log("search artst", request.data.artists.items);
+  // console.log("search artst", request.data.artists.items);
   const id = request.data.artists.items.map((item) => item.id);
-  console.log("searched artist id", id[0]);
+  // console.log("searched artist id", id[0]);
   return id;
 };
 
@@ -342,8 +390,8 @@ export const searchTrack = async (value, accessToken) => {
       },
     }
   );
-  console.log(request.data.tracks.items.map((item) => item.id));
+  // console.log(request.data.tracks.items.map((item) => item.id));
   const id = request.data.tracks.items.map((item) => item.id);
-  console.log("searched track id", id[0]);
+  // console.log("searched track id", id[0]);
   return id;
 };

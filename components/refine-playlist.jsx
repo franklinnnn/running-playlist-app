@@ -212,7 +212,7 @@ export const RefinePlaylist = ({
           min={75}
           max="225"
           step="1"
-          defaultValue="160"
+          defaultValue="170"
           onChange={() =>
             setRefinePlaylistInput({
               ...refinePlaylistInput,
@@ -238,8 +238,8 @@ export const RefinePlaylist = ({
           type="range"
           min={0}
           max="1"
-          step="0.001"
-          defaultValue="0.6"
+          step="0.01"
+          defaultValue="0.7"
           onChange={() =>
             setRefinePlaylistInput({
               ...refinePlaylistInput,
@@ -280,7 +280,7 @@ export const RefinePlaylist = ({
       </div> */}
 
       {/* INSTRUMENTALNESS */}
-      <div className="flex items-center gap-4">
+      {/* <div className="flex items-center gap-4">
         <span className="font-display text-lg uppercase italic">
           Instrumentalness
         </span>
@@ -291,8 +291,8 @@ export const RefinePlaylist = ({
           type="range"
           min={0}
           max="1"
-          step="0.001"
-          defaultValue="0.6"
+          step="0.01"
+          defaultValue="0.5"
           onChange={() =>
             setRefinePlaylistInput({
               ...refinePlaylistInput,
@@ -304,10 +304,10 @@ export const RefinePlaylist = ({
         <span className="font-display text-xl text-right w-10">
           {refinePlaylistInput.instrumentalness}
         </span>
-      </div>
+      </div> */}
 
       {/* MOOD */}
-      <div className="flex items-center gap-4">
+      {/* <div className="flex items-center gap-4">
         <span className="font-display text-lg uppercase italic">Mood</span>
         <span className="text-xs my-1">Happy tracks or sad tracks</span>
       </div>
@@ -316,8 +316,8 @@ export const RefinePlaylist = ({
           type="range"
           min={0}
           max="1"
-          step="0.001"
-          defaultValue="0.6"
+          step="0.01"
+          defaultValue="0.7"
           onChange={() =>
             setRefinePlaylistInput({
               ...refinePlaylistInput,
@@ -329,7 +329,7 @@ export const RefinePlaylist = ({
         <span className="font-display text-xl text-right w-10">
           {refinePlaylistInput.valence}
         </span>
-      </div>
+      </div> */}
 
       {/* <div className="flex items-center gap-4">
         <span className="font-display text-lg uppercase italic">
