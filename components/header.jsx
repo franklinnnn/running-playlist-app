@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const Header = () => {
   const { accessToken } = useAccessToken();
-  const { user, error, loading } = useUser();
+  const { user, errorUser, loadingUser } = useUser();
 
   const handleLogout = async () => {
     try {
@@ -40,7 +40,7 @@ export const Header = () => {
         <div className="flex items-center justify-between md:w-[36rem] w-screen px-2">
           {accessToken ? (
             <>
-              {loading ? (
+              {loadingUser ? (
                 <h1 className="skeleton w-32 h-8"></h1>
               ) : (
                 <h1 className="text-2xl font-display capitalize italic">

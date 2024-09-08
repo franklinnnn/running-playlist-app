@@ -26,7 +26,7 @@ const refinePlaylistInitialValues = {
     id: null,
     type: "track",
   },
-  genres: ["rock", "country", "edm"],
+  genres: ["rock", "country", "edm", "house", "pop", "metal"],
   tempo: 170,
   energy: 0.7,
   // instrumentalness: 0.5,

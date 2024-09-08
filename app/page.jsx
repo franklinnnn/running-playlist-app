@@ -7,7 +7,7 @@ import PlaylistProvider from "../components/playlist-context";
 import { useAccessToken } from "../hooks/useAccessToken";
 import { SongCard } from "../components/song-card";
 import { LoginModal } from "../components/modals/login-modal";
-import { getLandingPlaylist } from "../utils/spotify";
+import { getLandingPlaylist } from "../utils/get-playlists";
 
 const LandingPage = () => {
   const router = useRouter();

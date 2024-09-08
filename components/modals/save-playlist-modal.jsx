@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useAccessToken } from "../../hooks/useAccessToken";
@@ -17,6 +17,7 @@ export const SavePlaylistModal = ({ name, uris }) => {
   const router = useRouter();
 
   const closeModal = () => {
+    document.getElementById("save_playlist").close();
     router.refresh();
     setShowDetails(-1);
   };
@@ -38,9 +39,14 @@ export const SavePlaylistModal = ({ name, uris }) => {
           transition: Slide,
         }
       );
+      router.refresh();
     });
     document.getElementById("save_playlist").close();
   };
+
+  useEffect(() => {
+    console.log("refresh playlists");
+  }, [playlists]);
 
   return (
     <dialog id="save_playlist" className="modal items-center">

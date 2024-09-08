@@ -4,9 +4,8 @@ import { useRecentlyPlayed } from "../hooks/useRecentlyPlayed";
 import { PlaylistContext } from "./playlist-context";
 import { useContext, useEffect } from "react";
 
-export const SongList = () => {
-  const { tracks, name, error, loading } = useRecentlyPlayed();
-  const { playlist, setPlaylist } = useContext(PlaylistContext);
+export const SongList = ({ tracks, name }) => {
+  const { playlist, setPlaylist, loading, error } = useContext(PlaylistContext);
 
   useEffect(() => {
     const savedLandingPlaylist = localStorage.getItem("saved landing playlist");
@@ -25,28 +24,28 @@ export const SongList = () => {
       ? playlist.tracks.map((track) => track.uri)
       : tracks.map((track) => track.track.uri);
 
-  const handleSavePlaylist = () => {
-    document.getElementById("save_playlist").showModal();
-  };
   return (
-    <div className="relative  w-screen md:max-w-[36rem]">
+    <div className="relative w-screen md:max-w-[36rem]">
       <div className="flex justify-between items-center px-2 mb-6">
         {loading ? (
-          <h2 className="skeleton w-40 h-8"></h2>
+          <h2 className="skeleton w-40 h-8" />
         ) : (
           <h2 className="text-2xl font-display uppercase italic">
             {playlist.name ? playlist.name : name}
           </h2>
         )}
 
-        <button
-          className="btn btn-sm btn-primary font-body "
-          onClick={handleSavePlaylist}
-        >
-          Save tracks
-        </button>
+        {loading ? (
+          <button className="skeleton w-32 h-8" />
+        ) : (
+          <button
+            className="btn btn-sm btn-primary font-body "
+            onClick={() => document.getElementById("save_playlist").showModal()}
+          >
+            Save tracks
+          </button>
+        )}
       </div>
-
       <div
         className={`md:max-h-[30rem] mx-1 overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral ${
           loading ? "overflow-y-hidden pr-0" : "overflow-y-scroll pr-1"

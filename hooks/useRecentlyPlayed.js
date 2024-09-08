@@ -4,8 +4,8 @@ import axios from "axios";
 export function useRecentlyPlayed() {
   const [tracks, setTracks] = useState([]);
   const [name, setName] = useState("Recently Played");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [errorRecentlyPlayed, setErrorRecentlyPlayed] = useState(null);
+  const [loadingRecentlyPlayed, setLoadingRecentlyPlayed] = useState(true);
 
   useEffect(() => {
     async function fetchRecentlyPlayed() {
@@ -13,14 +13,16 @@ export function useRecentlyPlayed() {
         const response = await axios.get("/api/user/recently-played");
         setTracks(response.data.items);
       } catch (err) {
-        setError(err.response ? err.response.data.error : err.message);
+        setErrorRecentlyPlayed(
+          err.response ? err.response.data.error : err.message
+        );
       } finally {
-        setLoading(false);
+        setLoadingRecentlyPlayed(false);
       }
     }
 
     fetchRecentlyPlayed();
   }, []);
 
-  return { tracks, name, error, loading };
+  return { tracks, name, errorRecentlyPlayed, loadingRecentlyPlayed };
 }
