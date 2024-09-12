@@ -6,22 +6,6 @@ export const RefinePlaylist = ({
   refinePlaylistInput,
   setRefinePlaylistInput,
 }) => {
-  // const [artist, setArtist] = useState({
-  //   name: "",
-  //   id: "",
-  // });
-  // const [track, setTrack] = useState({
-  //   name: "",
-  //   id: "",
-  // });
-  // const [tags, setTags] = useState(["rock", "electronic"]);
-  // const [tempo, setTempo] = useState(160);
-  // const [energy, setEnergy] = useState(0.5);
-  // const [danceability, setDanceability] = useState(0.5);
-  // const [instrumentalness, setInstrumentalness] = useState(0.5);
-  // const [valence, setValence] = useState(0.5);
-  // const [popularity, setPopularity] = useState(50);
-
   const handleKeyDown = (e) => {
     if (e.key !== "Enter") return;
     const value = e.target.value;
@@ -43,19 +27,19 @@ export const RefinePlaylist = ({
   const removeAllGenres = () => {
     const removeGenres = [];
     setRefinePlaylistInput({ ...refinePlaylistInput, genres: removeGenres });
-    console.log("removed all genres", refinePlaylistInput.genres);
+    // console.log("removed all genres", refinePlaylistInput.genres);
   };
   const handleOnSearch = (string, results) => {
-    console.log(string, results);
+    // console.log(string, results);
   };
   const handleOnHover = (result) => {
     // the item hovered
-    console.log(result);
+    // console.log(result);
   };
 
   const handleOnSelect = (item) => {
     // the item selected
-    console.log(item);
+    // console.log(item);
     setRefinePlaylistInput({
       ...refinePlaylistInput,
       genres: [...refinePlaylistInput.genres, item.name],
@@ -63,7 +47,7 @@ export const RefinePlaylist = ({
   };
 
   const handleOnFocus = () => {
-    console.log("Focused");
+    // console.log("Focused");
   };
 
   const formatResult = (item) => {

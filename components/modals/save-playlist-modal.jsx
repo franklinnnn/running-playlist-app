@@ -44,10 +44,6 @@ export const SavePlaylistModal = ({ name, uris }) => {
     document.getElementById("save_playlist").close();
   };
 
-  useEffect(() => {
-    console.log("refresh playlists");
-  }, [playlists]);
-
   return (
     <dialog id="save_playlist" className="modal items-center">
       <div className="modal-box pl-4 pr-2">

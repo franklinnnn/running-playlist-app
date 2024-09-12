@@ -119,28 +119,6 @@ export const getRefinedPlaylist = async (
   setLoading(true);
   setError(null);
 
-  // const retryDelay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-  // const makeRequestWithRetry = async (url, accessToken, retries = 2) => {
-  //   try {
-  //     const response = await axios.get(url, {
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //       },
-  //     });
-  //     return response;
-  //   } catch (error) {
-  //     if (error.response?.status === 429 && retries > 0) {
-  //       const retryAfter = error.response.headers["retry-after"]
-  //         ? parseInt(error.response.headers["retry-after"]) * 1000
-  //         : 1000;
-  //       await retryDelay(retryAfter);
-  //       return makeRequestWithRetry(url, accessToken, retries - 1);
-  //     }
-  //     throw error;
-  //   }
-  // };
-
   try {
     const tokenResponse = await axios.get("/api/auth/client/token");
     const accessToken = tokenResponse.data.accessToken;
@@ -185,9 +163,6 @@ export const getRefinedPlaylist = async (
       .map((genre) => genre)
       .slice(0, maxGenres)
       .join(",")}`;
-
-    console.log(maxGenres);
-    console.log(genres);
 
     const seeds = `${artist}${track}${genres}`;
 
