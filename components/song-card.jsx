@@ -24,20 +24,20 @@ export const SongCard = ({ song }) => {
           />
           <div className="overflow-hidden flex items-center font-display w-full">
             <div className="w-1/2">
-              <h2 className="text-xl text-ellipsis truncate italic pr-2">
+              <h2 className="text-xl text-ellipsis truncate pr-2">
                 {song.name}
               </h2>
-              <p className="text-sm italic">
+              <p className="text-sm">
                 {song?.artists?.map((artist) => artist.name).join(", ")}
               </p>
             </div>
             <div className="relative flex flex-row justify-end w-1/2 text-md font-display">
-              <div className="flex flex-col justify-evenly text-xs md:hidden">
+              {/* <div className="flex flex-col justify-evenly text-xs md:hidden">
                 <span>tempo</span>
                 <span>energy</span>
                 <span>length</span>
-              </div>
-              <div className="flex flex-col md:flex-row">
+              </div> */}
+              <div className="flex flex-col font-body md:flex-row">
                 <span className="pl-2 min-w-20">❤️ {tempo}</span>
                 <span className="pl-2 min-w-20">⚡ {energy}</span>
                 <span className="pl-2 min-w-20">⌚ {length}</span>

@@ -72,7 +72,7 @@ export const PlaylistCard = ({
             alt="Playlist cover"
           />
         </div>
-        <div className="overflow-hidden font-display italic uppercase">
+        <div className="overflow-hidden font-display uppercase">
           <p className="whitespace-nowrap truncate text-ellipsis text-xl pr-2">
             {playlist.name}
           </p>

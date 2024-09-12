@@ -52,7 +52,7 @@ export const SavePlaylistModal = ({ name, uris }) => {
     <dialog id="save_playlist" className="modal items-center">
       <div className="modal-box pl-4 pr-2">
         <div>
-          <h3 className="font-bold text-2xl font-display uppercase italic">
+          <h3 className="font-bold text-2xl font-display uppercase">
             Your playlists
           </h3>
           <p className="font-body">

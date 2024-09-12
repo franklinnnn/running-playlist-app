@@ -80,12 +80,12 @@ export const MakePlaylistModal = ({ setLandingPlaylist }) => {
   return (
     <dialog id="make_playlist" className="modal items-center">
       <div className="modal-box flex flex-col gap-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral">
-        <h3 className="font-bold text-2xl font-display uppercase italic">
+        <h3 className="font-bold text-2xl font-display uppercase">
           Make playlist
         </h3>
         {!showRefinePlaylistInput && (
           <div>
-            <div className="text-xl font-body uppercase italic mb-2">
+            <div className="text-xl font-body uppercase mb-2">
               <p className="font-display">pace</p>
               <div className="join w-full">
                 <button
@@ -143,7 +143,7 @@ export const MakePlaylistModal = ({ setLandingPlaylist }) => {
                 </button>
               </div>
             </div>
-            <div className="text-xl font-body uppercase italic">
+            <div className="text-xl font-body uppercase">
               <p className="font-display">energy</p>
               <div className="join w-full">
                 <button
@@ -192,7 +192,7 @@ export const MakePlaylistModal = ({ setLandingPlaylist }) => {
           <hr className="h-px my-6 bg-secondary border-0" />
         )}
         <div
-          className="flex items-center gap-2 text-xl text-left  font-display uppercase italic hover:cursor-pointer"
+          className="flex items-center gap-2 text-xl text-left  font-display uppercase hover:cursor-pointer"
           onClick={() => setShowRefinePlaylistInput(!showRefinePlaylistInput)}
         >
           Refine playlist{" "}

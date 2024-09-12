@@ -30,7 +30,7 @@ export const SongList = ({ tracks, name }) => {
         {loading ? (
           <h2 className="skeleton w-40 h-8" />
         ) : (
-          <h2 className="text-2xl font-display uppercase italic">
+          <h2 className="text-2xl font-display uppercase ">
             {playlist.name ? playlist.name : name}
           </h2>
         )}
@@ -59,7 +59,7 @@ export const SongList = ({ tracks, name }) => {
           </div>
         ) : (
           <div className="relative">
-            <div className="sticky top-0 right-0 bg-base-100 mb-1 z-10 hidden md:flex justify-end gap-12 pr-9 text-xs uppercase font-display">
+            <div className="sticky top-0 right-0 bg-base-100 mb-1 z-10 hidden md:flex justify-end gap-8 pr-9 text-xs uppercase font-display">
               <span>tempo</span>
               <span>energy</span>
               <span>length</span>

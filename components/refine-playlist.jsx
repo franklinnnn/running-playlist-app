@@ -126,7 +126,7 @@ export const RefinePlaylist = ({
     <form className="flex flex-col gap-1">
       <div>
         <div className="flex items-center gap-4">
-          <span className="font-display text-lg uppercase italic">Artist</span>
+          <span className="font-display text-lg uppercase">Artist</span>
           <span className="text-xs my-1">
             Refine with artist. Enter artist name or artist link.
           </span>
@@ -141,7 +141,7 @@ export const RefinePlaylist = ({
 
       <div>
         <div className="flex items-center gap-4">
-          <span className="font-display text-lg uppercase italic">Track</span>
+          <span className="font-display text-lg uppercase">Track</span>
           <span className="text-xs my-1">
             Refine with track. Enter track name or track link.
           </span>
@@ -156,7 +156,7 @@ export const RefinePlaylist = ({
 
       <div>
         <div className="flex items-center gap-4 mb-2">
-          <span className="font-display text-lg uppercase italic">Genres</span>
+          <span className="font-display text-lg uppercase">Genres</span>
           <div className="flex justify-between items-center w-full">
             <span className="text-xs">Refine with genres. Select up to 5.</span>
             {/* <button
@@ -202,7 +202,7 @@ export const RefinePlaylist = ({
       </div>
 
       <div className="flex items-center gap-4">
-        <span className="font-display text-lg uppercase italic">Tempo</span>
+        <span className="font-display text-lg uppercase">Tempo</span>
         <span className="text-xs my-1">150-180 is a good range.</span>
       </div>
 
@@ -229,7 +229,7 @@ export const RefinePlaylist = ({
 
       {/* ENERGY */}
       <div className="flex items-center gap-4">
-        <span className="font-display text-lg uppercase italic">Energy</span>
+        <span className="font-display text-lg uppercase">Energy</span>
         <span className="text-xs my-1">
           Refine how fast and loud tracks will be.
         </span>
@@ -255,7 +255,7 @@ export const RefinePlaylist = ({
       </div>
 
       {/* <div className="flex items-center gap-4">
-        <span className="font-display text-lg uppercase italic">
+        <span className="font-display text-lg uppercase">
           Danceability
         </span>
         <span className="text-xs my-1">Set higher for more dancing.</span>
@@ -282,7 +282,7 @@ export const RefinePlaylist = ({
 
       {/* INSTRUMENTALNESS */}
       {/* <div className="flex items-center gap-4">
-        <span className="font-display text-lg uppercase italic">
+        <span className="font-display text-lg uppercase">
           Instrumentalness
         </span>
         <span className="text-xs my-1">Amount of vocals, or not.</span>
@@ -309,7 +309,7 @@ export const RefinePlaylist = ({
 
       {/* MOOD */}
       {/* <div className="flex items-center gap-4">
-        <span className="font-display text-lg uppercase italic">Mood</span>
+        <span className="font-display text-lg uppercase">Mood</span>
         <span className="text-xs my-1">Happy tracks or sad tracks</span>
       </div>
       <div className="flex items-center gap-4">
@@ -333,7 +333,7 @@ export const RefinePlaylist = ({
       </div> */}
 
       {/* <div className="flex items-center gap-4">
-        <span className="font-display text-lg uppercase italic">
+        <span className="font-display text-lg uppercase">
           Popularity
         </span>
         <span className="text-xs my-1">

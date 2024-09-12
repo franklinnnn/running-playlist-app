@@ -34,7 +34,7 @@ export const Header = () => {
       </Head>
       <div>
         <ToastContainer />
-        <div className="text-4xl text-center font-display uppercase italic mt-2 mb-12">
+        <div className="text-4xl text-center font-display uppercase  mt-2 mb-12">
           <Link href={accessToken ? "/dashboard" : "/"}>🏃 PacePlaylist </Link>
         </div>
         <div className="flex items-center justify-between md:w-[36rem] w-screen px-2">
@@ -43,13 +43,13 @@ export const Header = () => {
               {loadingUser ? (
                 <h1 className="skeleton w-32 h-8"></h1>
               ) : (
-                <h1 className="text-2xl font-display capitalize italic">
+                <h1 className="text-2xl font-display capitalize">
                   hello {user?.display_name}!
                 </h1>
               )}
             </>
           ) : (
-            <h1 className="text-2xl font-display capitalize italic">hello!</h1>
+            <h1 className="text-2xl font-display capitalize">hello!</h1>
           )}
           <div className="flex gap-2 items-center font-body">
             <label className="swap swap-rotate">

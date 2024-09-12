@@ -4,9 +4,7 @@ import React from "react";
 const AboutPage = () => {
   return (
     <div className="h-full md:max-h-[30rem] overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral w-screen md:max-w-[36rem] px-2 font-body">
-      <h1 className="text-4xl font-display uppercase italic text-center">
-        About
-      </h1>
+      <h1 className="text-4xl font-display uppercase text-center">About</h1>
       <div>
         <p>
           PacePlaylist generates playlists tailored to your running pace,
@@ -14,18 +12,16 @@ const AboutPage = () => {
         </p>
         <br />
         <p>
-          Using the Spotify Web API, we've made it super easy for you to
-          discover fresh tracks without any hassle. Just dive in, explore some
-          randomly generated playlists, and if you find something you love, you
-          can save it to your Spotify account. No login required to start, just
-          great music to keep you going.
+          Using the Spotify Web API, it's super easy for you to discover fresh
+          tracks without any hassle. Just dive in, explore some randomly
+          generated playlists, and if you find something you love, you can save
+          it to your Spotify account. No login required to start, just great
+          music to keep you going.
         </p>
       </div>
       <br />
       <div>
-        <h2 className="text-3xl font-display uppercase italic text-center">
-          FAQ
-        </h2>
+        <h2 className="text-3xl font-display uppercase text-center">FAQ</h2>
         <h3 className="text-xl mt-4 mb-1">
           Do I need a Spotify account to use PacePlaylist?
         </h3>

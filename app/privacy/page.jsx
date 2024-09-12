@@ -4,7 +4,7 @@ import React from "react";
 const PrivacyPage = () => {
   return (
     <div className="h-full md:min-h-[30rem] w-screen md:max-w-[36rem] px-2">
-      <h1 className="text-4xl font-display uppercase italic text-center">
+      <h1 className="text-4xl font-display uppercase text-center">
         Privacy Policy
       </h1>
       <br />

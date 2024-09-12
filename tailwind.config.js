@@ -8,7 +8,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      display: ["Khand"],
+      display: ["Racing Sans One"],
       body: ["Switzer"],
     },
   },

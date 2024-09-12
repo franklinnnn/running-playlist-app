@@ -4,9 +4,7 @@ import Link from "next/link";
 const ContactPage = () => {
   return (
     <div className="h-full md:min-h-[30rem] w-screen md:max-w-[36rem] px-2">
-      <h1 className="text-4xl font-display uppercase italic text-center">
-        Contact
-      </h1>
+      <h1 className="text-4xl font-display uppercase text-center">Contact</h1>
       <br />
       <p>
         <a

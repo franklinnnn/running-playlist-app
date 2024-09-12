@@ -32,7 +32,7 @@ export const LoginModal = ({ landingPlaylist }) => {
   return (
     <dialog id="login_modal" className="modal">
       <div className="modal-box">
-        <h1 className="text-4xl text-center font-display uppercase italic">
+        <h1 className="text-4xl text-center font-display uppercase">
           🏃 PacePlaylist
         </h1>
         <p className="font-body text-center text-sm">
