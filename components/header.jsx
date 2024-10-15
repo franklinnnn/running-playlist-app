@@ -63,7 +63,7 @@ export const Header = () => {
             </label>
             {accessToken ? (
               <button className="btn btn-primary btn-sm" onClick={handleLogout}>
-                Logout
+                Log out
               </button>
             ) : (
               <Link href="/api/auth/login">

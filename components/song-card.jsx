@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useTrackFeatures } from "../hooks/useTrackFeatures";
+import Link from "next/link";
 
 export const SongCard = ({ song }) => {
   const trackId = song.id;
@@ -10,7 +11,12 @@ export const SongCard = ({ song }) => {
       {!song || loading ? (
         <div className="skeleton h-20 mb-2 p-2 rounded-md" />
       ) : (
-        <div className="bg-secondary/10 mb-2 p-2 pt-1 rounded-md flex items-center gap-2 max-h-20 hover:bg-secondary/20 hover:cursor-default transition text-base-content font-body uppercase font-bold">
+        <Link
+          href={song.external_urls.spotify}
+          className="bg-secondary/10 mb-2 p-2 pt-1 rounded-md flex items-center gap-2 max-h-20 hover:bg-secondary/20 hover:cursor-default transition text-base-content font-body uppercase font-bold hover:cursor-pointer"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <Image
             src={
               song.album.images
@@ -44,7 +50,7 @@ export const SongCard = ({ song }) => {
               </div>
             </div>
           </div>
-        </div>
+        </Link>
       )}
     </div>
   );
