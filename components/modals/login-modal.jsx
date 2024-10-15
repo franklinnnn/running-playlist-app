@@ -41,8 +41,11 @@ export const LoginModal = ({ landingPlaylist }) => {
 
         <div className="w-full flex justify-center mt-12">
           {/* <Link href="/api/auth/login"> */}
-          <button className="btn btn-primary" onClick={handleLogin}>
-            Login with Spotify
+          <button
+            className="btn btn-primary bg-[#1ed760] hover:bg-[#1ed760] border-none"
+            onClick={handleLogin}
+          >
+            Log in to Spotify
           </button>
           {/* </Link> */}
         </div>
