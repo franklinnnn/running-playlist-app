@@ -9,11 +9,11 @@ export const SongCard = ({ song }) => {
   return (
     <div>
       {!song || loading ? (
-        <div className="skeleton h-20 mb-2 p-2 rounded-md" />
+        <div className="skeleton h-32 mb-2 p-2 rounded-md" />
       ) : (
         <Link
           href={song.external_urls.spotify}
-          className="bg-secondary/10 mb-2 p-2 pt-1 rounded-md flex items-center gap-2 max-h-20 hover:bg-secondary/20 hover:cursor-default transition text-base-content font-body uppercase font-bold hover:cursor-pointer"
+          className="bg-secondary/10 mb-2 p-2 pt-1 rounded-md flex items-center gap-2 max-h-32 hover:bg-secondary/20 hover:cursor-pointer transition text-base-content font-body uppercase font-bold "
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -24,8 +24,8 @@ export const SongCard = ({ song }) => {
                 : "/album-placeholder.png"
             }
             alt="Album cover"
-            width={60}
-            height={60}
+            width={80}
+            height={80}
             className="object-contain"
           />
           <div className="overflow-hidden flex items-center font-display w-full">
@@ -33,9 +33,10 @@ export const SongCard = ({ song }) => {
               <h2 className="text-xl text-ellipsis truncate pr-2">
                 {song.name}
               </h2>
-              <p className="text-sm">
+              <p className="text-base truncate">
                 {song?.artists?.map((artist) => artist.name).join(", ")}
               </p>
+              <p className="text-xs truncate">{song.album.name}</p>
             </div>
             <div className="relative flex flex-row justify-end w-1/2 text-md font-display">
               {/* <div className="flex flex-col justify-evenly text-xs md:hidden">
