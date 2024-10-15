@@ -100,7 +100,7 @@ const LandingPage = () => {
             {loading ? (
               <div>
                 {Array.from({ length: 8 }, (_, i) => (
-                  <div className="skeleton h-20 mb-2 p-2 rounded-md" key={i} />
+                  <div className="skeleton h-32 mb-2 p-2 rounded-md" key={i} />
                 ))}
               </div>
             ) : (
