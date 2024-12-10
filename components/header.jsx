@@ -67,9 +67,7 @@ export const Header = () => {
               </button>
             ) : (
               <Link href="/api/auth/login">
-                <button className="btn btn-primary btn-sm">
-                  Log in to Spotify
-                </button>
+                <button className="btn btn-primary btn-sm">Log in</button>
               </Link>
             )}
           </div>

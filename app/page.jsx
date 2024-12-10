@@ -2,6 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 import PlaylistProvider from "../components/playlist-context";
 import { useAccessToken } from "../hooks/useAccessToken";
@@ -74,7 +75,7 @@ const LandingPage = () => {
             {loading ? (
               <h2 className="skeleton w-40 h-8" />
             ) : (
-              <h2 className="text-2xl font-display uppercase">
+              <h2 className="text-2xl font-display uppercase ml-1 md:ml-0">
                 {landingPlaylist.name}
               </h2>
             )}
@@ -105,6 +106,24 @@ const LandingPage = () => {
               </div>
             ) : (
               <div className="relative">
+                <button
+                  onClick={() =>
+                    window.open(
+                      "https://open.spotify.com/",
+                      "_blank",
+                      "noopener,noreferrer"
+                    )
+                  }
+                  className="flex items-center gap-2 btn btn-sm btn-primary mb-2"
+                >
+                  <Image
+                    src="/spotify/Spotify_Primary_Logo_RGB_Black.png"
+                    width={20}
+                    height={20}
+                    alt="Spotify logo"
+                  />
+                  Open Spotify
+                </button>
                 <div className="sticky top-0 right-0 bg-base-100 mb-1 z-10 hidden md:flex justify-end gap-8 pr-9 text-xs uppercase font-display">
                   <span>tempo</span>
                   <span>energy</span>
