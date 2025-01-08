@@ -6,9 +6,10 @@ import Image from "next/image";
 
 import PlaylistProvider from "../components/playlist-context";
 import { useAccessToken } from "../hooks/useAccessToken";
+import { getLandingPlaylist } from "../utils/get-playlists";
+import { EnterPace } from "../components/enter-pace";
 import { SongCard } from "../components/song-card";
 import { LoginModal } from "../components/modals/login-modal";
-import { getLandingPlaylist } from "../utils/get-playlists";
 
 const LandingPage = () => {
   const router = useRouter();
@@ -47,26 +48,35 @@ const LandingPage = () => {
       <div className="text-content text-center font-body">
         <div className="max-w-xl">
           <div className="mb-4">
-            Boost your run with the perfect playlist! Choose your pace and let
-            the music match your stride. Start generating your custom running
-            playlist now!
+            Boost your run with the perfect playlist!{" "}
+            <p>Enter your target pace or generate a random one.</p>
           </div>
 
-          <button
-            className="btn btn-primary min-w-40"
-            onClick={
-              accessToken ? router.push("/dashboard") : handleFetchPlaylist
-            }
-            disabled={loading}
-          >
-            {loading ? (
-              <span className="loading loading-spinner loading-md"></span>
-            ) : (
-              <span>
-                {accessToken ? "Go to dashboard" : "Make me a playlist"}
-              </span>
+          <div className="flex items-center justify-center h-12">
+            {loading ? null : (
+              <EnterPace
+                setLandingPlaylist={setLandingPlaylist}
+                loading={loading}
+                setLoading={setLoading}
+                setError={setError}
+              />
             )}
-          </button>
+            <button
+              className="btn btn-primary h-full min-w-40 border-primary border-[1px]"
+              onClick={
+                accessToken ? router.push("/dashboard") : handleFetchPlaylist
+              }
+              disabled={loading}
+            >
+              {loading ? (
+                <span className="loading loading-spinner loading-md"></span>
+              ) : (
+                <span>
+                  {accessToken ? "Go to dashboard" : "Make me a playlist"}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
       </div>
       {landingPlaylist.tracks ? (

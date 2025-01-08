@@ -49,6 +49,9 @@ export const SongCard = ({ song }) => {
                 <span className="pl-2 min-w-20">⚡ {energy}</span>
                 <span className="pl-2 min-w-20">⌚ {length}</span>
               </div>
+              {/* <div className="self-end">
+                <button className="btn btn-xs btn-secondary">spotify</button>
+              </div> */}
             </div>
           </div>
         </Link>

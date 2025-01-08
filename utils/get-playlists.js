@@ -473,7 +473,113 @@ export const getLandingPlaylist = async (
     }
 
     setLandingPlaylist({
-      name: `${tempo} BPM Running playlist`,
+      name: `${tempo} BPM Running playlist | PacePlaylist`,
+      tracks: tracks,
+    });
+  } catch (err) {
+    console.error("Error fetching playlist:", err);
+    setError(err);
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const getLandingPlaylistFromPace = async (
+  setLandingPlaylist,
+  tempo,
+  time,
+  setLoading,
+  setError
+) => {
+  setLoading(true);
+  setError(null);
+
+  try {
+    const tokenResponse = await axios.get("/api/auth/client/token");
+    const accessToken = tokenResponse.data.accessToken;
+
+    const trackArr = [
+      "4PTG3Z6ehGkBFwjybzWkR8",
+      "6DlPa2rrVK3BygXJ48WYo3",
+      "1hAloWiinXLPQUJxrJReb1",
+    ];
+    const artistArr = [
+      "4tZwfgrHOc3mvqYlEYSvVi",
+      "25uiPmTg16RbhZWAqwLBy5",
+      "0gxyHStUsqpMadRV0Di1Qt",
+    ];
+    const genreArr = [
+      "rock",
+      "electronic",
+      "j-pop",
+      "k-pop",
+      "jazz",
+      "country",
+    ];
+    // const tempoArr = ["150", "155", "160", "165", "170", "175", "180"];
+
+    const track = trackArr[Math.floor(Math.random() * trackArr.length)];
+    const artist = artistArr[Math.floor(Math.random() * artistArr.length)];
+    const genre = genreArr[Math.floor(Math.random() * genreArr.length)];
+    // const tempo = tempoArr[Math.floor(Math.random() * tempoArr.length)];
+    // const minTempo = tempo - 2;
+    // const maxTempo = +tempo + 2;
+
+    const seedArr = [
+      `&seed_tracks=${track}`,
+      `&seed_artists=${artist}`,
+      `&seed_genres=${genre}`,
+      `&seed_genres=${genre}&seed_tracks=${track}`,
+      `&seed_genres=${genre}&seed_artists=${artist}`,
+    ];
+    let seed = seedArr[Math.floor(Math.random() * seedArr.length)];
+
+    // Add a cache-busting parameter
+    const cacheBuster = Date.now();
+    const requestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo.average}&min_tempo=${tempo.min}&max_tempo=${tempo.max}&cache_buster=${cacheBuster}`;
+
+    const playlistResponse = await axios.get(requestUrl, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    let tracks = playlistResponse.data.tracks;
+
+    // Filter out duplicate tracks by their id
+    tracks = tracks.filter(
+      (track, index, self) => self.findIndex((t) => t.id === track.id) === index
+    );
+
+    while (tracks.length < 10) {
+      seed = seedArr[Math.floor(Math.random() * seedArr.length)];
+      const updatedRequestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${
+        tempo.average
+      }&min_tempo=${tempo.min - 2}&max_tempo=${
+        tempo.max + 2
+      }&cache_buster=${cacheBuster}`;
+
+      const addedPlaylistResponse = await axios.get(updatedRequestUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const newTracks = addedPlaylistResponse.data.tracks;
+
+      // Filter out duplicates before adding them to the main array
+      newTracks.forEach((newTrack) => {
+        if (!tracks.some((track) => track.id === newTrack.id)) {
+          tracks.push(newTrack);
+        }
+      });
+
+      // Slice to ensure we only return 10 tracks
+      tracks = tracks.slice(0, 10);
+    }
+
+    setLandingPlaylist({
+      name: `${time} Running playlist | PacePlaylist`,
       tracks: tracks,
     });
   } catch (err) {
