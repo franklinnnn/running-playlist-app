@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 import Image from "next/image";
 
 import PlaylistProvider from "../components/playlist-context";
@@ -21,22 +21,6 @@ const LandingPage = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const generatePlaylist = async () => {
-    setLoading(true);
-    setLandingPlaylist({
-      name: null,
-      tracks: null,
-    });
-    try {
-      const response = await axios.get("/api/playlist/landing");
-      setLandingPlaylist({ name: "Running playlist", tracks: response.data });
-    } catch (error) {
-      console.error("Error fetching playlist:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleFetchPlaylist = () => {
     console.log("fetching playlist");

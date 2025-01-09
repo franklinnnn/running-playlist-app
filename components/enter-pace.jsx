@@ -29,7 +29,6 @@ export const EnterPace = ({ setLandingPlaylist, setLoading, setError }) => {
       console.log(`${pace}/${unit}`);
       const time = `${pace}/${unit}`;
 
-      // make playlist here
       getLandingPlaylistFromPace(
         setLandingPlaylist,
         tempo,
@@ -53,14 +52,12 @@ export const EnterPace = ({ setLandingPlaylist, setLoading, setError }) => {
     const minutes = parseInt(match[1], 10);
     const seconds = parseInt(match[2], 10);
 
-    // Convert to total seconds
     let totalSeconds;
     if (unit === "mi") {
       totalSeconds = minutes * 60 + seconds;
     } else {
       totalSeconds = (minutes * 60 + seconds) * 1.60934;
     }
-    // console.log(Math.round(totalSeconds), unit);
 
     return totalSeconds;
   };

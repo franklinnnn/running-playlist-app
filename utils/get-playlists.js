@@ -516,14 +516,10 @@ export const getLandingPlaylistFromPace = async (
       "jazz",
       "country",
     ];
-    // const tempoArr = ["150", "155", "160", "165", "170", "175", "180"];
 
     const track = trackArr[Math.floor(Math.random() * trackArr.length)];
     const artist = artistArr[Math.floor(Math.random() * artistArr.length)];
     const genre = genreArr[Math.floor(Math.random() * genreArr.length)];
-    // const tempo = tempoArr[Math.floor(Math.random() * tempoArr.length)];
-    // const minTempo = tempo - 2;
-    // const maxTempo = +tempo + 2;
 
     const seedArr = [
       `&seed_tracks=${track}`,
@@ -534,7 +530,6 @@ export const getLandingPlaylistFromPace = async (
     ];
     let seed = seedArr[Math.floor(Math.random() * seedArr.length)];
 
-    // Add a cache-busting parameter
     const cacheBuster = Date.now();
     const requestUrl = `https://api.spotify.com/v1/recommendations?limit=10&market=US${seed}&target_tempo=${tempo.average}&min_tempo=${tempo.min}&max_tempo=${tempo.max}&cache_buster=${cacheBuster}`;
 
@@ -546,7 +541,6 @@ export const getLandingPlaylistFromPace = async (
 
     let tracks = playlistResponse.data.tracks;
 
-    // Filter out duplicate tracks by their id
     tracks = tracks.filter(
       (track, index, self) => self.findIndex((t) => t.id === track.id) === index
     );
@@ -567,14 +561,12 @@ export const getLandingPlaylistFromPace = async (
 
       const newTracks = addedPlaylistResponse.data.tracks;
 
-      // Filter out duplicates before adding them to the main array
       newTracks.forEach((newTrack) => {
         if (!tracks.some((track) => track.id === newTrack.id)) {
           tracks.push(newTrack);
         }
       });
 
-      // Slice to ensure we only return 10 tracks
       tracks = tracks.slice(0, 10);
     }
 
