@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { useTrackFeatures } from "../hooks/useTrackFeatures";
 import Link from "next/link";
+
+import { useTrackFeatures } from "../hooks/useTrackFeatures";
 
 export const SongCard = ({ song }) => {
   const trackId = song.id;

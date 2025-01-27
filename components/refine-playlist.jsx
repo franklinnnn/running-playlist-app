@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { genreArray } from "../utils/genres";
-import Link from "next/link";
 
 export const RefinePlaylist = ({
   refinePlaylistInput,

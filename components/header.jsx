@@ -1,10 +1,11 @@
 "use client";
-import { useAccessToken } from "../hooks/useAccessToken";
-import { useUser } from "../hooks/useUser";
 import Link from "next/link";
 import Head from "next/head";
 import { Slide, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { useAccessToken } from "../hooks/useAccessToken";
+import { useUser } from "../hooks/useUser";
 
 export const Header = () => {
   const { accessToken } = useAccessToken();

@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import Image from "next/image";
+
 import { PlaylistContext } from "./playlist-context";
 import { useRecentlyPlayed } from "../hooks/useRecentlyPlayed";
 import { SavePlaylistModal } from "./modals/save-playlist-modal";

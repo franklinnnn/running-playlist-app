@@ -473,7 +473,7 @@ export const getLandingPlaylist = async (
     }
 
     setLandingPlaylist({
-      name: `${tempo} BPM Running playlist | PacePlaylist`,
+      name: `${tempo} BPM Running playlist`,
       tracks: tracks,
     });
   } catch (err) {
@@ -571,7 +571,7 @@ export const getLandingPlaylistFromPace = async (
     }
 
     setLandingPlaylist({
-      name: `${time} Running playlist | PacePlaylist`,
+      name: `${time} Running playlist`,
       tracks: tracks,
     });
   } catch (err) {
