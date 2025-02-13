@@ -33,18 +33,10 @@ const LandingPage = () => {
         <div className="max-w-xl">
           <div className="mb-4">
             Boost your run with the perfect playlist!{" "}
-            <p>Enter your target pace or generate a random one.</p>
+            <p>Generate a random playlist or get one from your target pace.</p>
           </div>
 
           <div className="flex items-center justify-center h-12">
-            {loading ? null : (
-              <EnterPace
-                setLandingPlaylist={setLandingPlaylist}
-                loading={loading}
-                setLoading={setLoading}
-                setError={setError}
-              />
-            )}
             <button
               className="btn btn-primary h-full min-w-40 border-primary border-[1px]"
               onClick={
@@ -60,6 +52,14 @@ const LandingPage = () => {
                 </span>
               )}
             </button>
+            {loading ? null : (
+              <EnterPace
+                setLandingPlaylist={setLandingPlaylist}
+                loading={loading}
+                setLoading={setLoading}
+                setError={setError}
+              />
+            )}
           </div>
         </div>
       </div>

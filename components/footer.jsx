@@ -24,6 +24,9 @@ export const Footer = () => {
         >
           Home
         </Link>
+        <Link href="/calculator" className="text-secondary hover:text-primary">
+          Pace Calculator
+        </Link>
         <Link href="/about" className="text-secondary hover:text-primary">
           About
         </Link>

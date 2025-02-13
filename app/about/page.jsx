@@ -4,7 +4,9 @@ import React from "react";
 const AboutPage = () => {
   return (
     <div className="h-full md:max-h-[30rem] overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral w-screen md:max-w-[36rem] px-2 font-body">
-      <h1 className="text-4xl font-display uppercase text-center">About</h1>
+      <h1 className="text-4xl font-display uppercase text-center mb-4">
+        About
+      </h1>
       <div>
         <p>
           PacePlaylist generates playlists tailored to your running pace,

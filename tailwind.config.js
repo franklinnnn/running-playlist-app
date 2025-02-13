@@ -8,8 +8,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      display: ["Racing Sans One"],
-      body: ["Switzer"],
+      display: ["Racing Sans One", "sans-serif"],
+      body: ["Switzer", "sans-serif"],
     },
   },
   prefix: "",

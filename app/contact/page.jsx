@@ -4,8 +4,9 @@ import Link from "next/link";
 const ContactPage = () => {
   return (
     <div className="h-full md:min-h-[30rem] w-screen md:max-w-[36rem] px-2">
-      <h1 className="text-4xl font-display uppercase text-center">Contact</h1>
-      <br />
+      <h1 className="text-4xl font-display uppercase text-center mb-4">
+        Contact
+      </h1>
       <p>
         <a
           href="mailto:franklin.assa@gmail.com?subject=PacePlaylist"
